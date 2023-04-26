@@ -1,0 +1,12 @@
+
+
+.activated {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  border: 3px solid rgb(167, 202, 228);
+  background-color: rgba(72, 197, 255, 0.244);
+}
