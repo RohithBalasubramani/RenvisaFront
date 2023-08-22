@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RenvisaFront/static/css/main.87abafb0.css",
-    "main.js": "/RenvisaFront/static/js/main.261731dd.js",
+    "main.js": "/RenvisaFront/static/js/main.5405c934.js",
     "static/js/787.c5429df2.chunk.js": "/RenvisaFront/static/js/787.c5429df2.chunk.js",
     "static/media/Prod1.png": "/RenvisaFront/static/media/Prod1.9c9b70e005907c53b7e8.png",
     "static/media/SolCat.png": "/RenvisaFront/static/media/SolCat.9c9b70e005907c53b7e8.png",
@@ -39,19 +39,19 @@
     "static/media/Shipping.svg": "/RenvisaFront/static/media/Shipping.1025d2e5ebe863d85aedd8d5d91cf8f4.svg",
     "static/media/Support.svg": "/RenvisaFront/static/media/Support.48cb805f96180825d8fe5d9503bc69b9.svg",
     "static/media/StarReview.svg": "/RenvisaFront/static/media/StarReview.72c1cf293126c065019ee4670dd40275.svg",
-    "index.html": "/RenvisaFront/index.html",
     "static/media/DeleteIcon.svg": "/RenvisaFront/static/media/DeleteIcon.d5a8bc853d9d20fd98d5aff311ca4806.svg",
+    "index.html": "/RenvisaFront/index.html",
     "static/media/FilledReview.svg": "/RenvisaFront/static/media/FilledReview.70381626aeb8879be33e5f4543454738.svg",
     "static/media/VectorStarEmp.svg": "/RenvisaFront/static/media/VectorStarEmp.b3519bf1a5a5bb08a5df4a3c54b64ce3.svg",
     "static/media/VectorStarFill.svg": "/RenvisaFront/static/media/VectorStarFill.415cc3a9635df40c08c7b121d593c2e4.svg",
     "static/media/Disctag.svg": "/RenvisaFront/static/media/Disctag.4e11154a31428b0fb83168c04df3d06a.svg",
     "static/media/DDArc.svg": "/RenvisaFront/static/media/DDArc.6d8c850a622f3e6c59f98b5ecc2f94d8.svg",
     "main.87abafb0.css.map": "/RenvisaFront/static/css/main.87abafb0.css.map",
-    "main.261731dd.js.map": "/RenvisaFront/static/js/main.261731dd.js.map",
+    "main.5405c934.js.map": "/RenvisaFront/static/js/main.5405c934.js.map",
     "787.c5429df2.chunk.js.map": "/RenvisaFront/static/js/787.c5429df2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.87abafb0.css",
-    "static/js/main.261731dd.js"
+    "static/js/main.5405c934.js"
   ]
 }
