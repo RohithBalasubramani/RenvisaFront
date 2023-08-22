@@ -1,63 +1,48 @@
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BoldSecondWord from "./BoldSecond";
 
-
-
-
-
 const Container = styled.div`
-  width: 97vw;
+  width: 100%;
   height: 500px;
   display: block;
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
-  
+
   background: rgba(76, 175, 80, 0);
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
 `;
 
-
 const WrapperTwo = styled.div`
-height: 100%;
-display: flex;
-
-`
-
+  height: 100%;
+  display: flex;
+`;
 
 const WrapperA = styled.div`
-  height:100vh;
+  height: 100vh;
   width: 150vw;
- 
-  
-  
+
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -50}vw);
-  
 `;
 
 const WrapperB = styled.div`
-  
   position: absolute;
   left: 50%;
-  z-index:10;
-  height:300vh;
+  z-index: 10;
+  height: 300vh;
   width: 50vw;
-  background: #FFF8EB;
+  background: #fff8eb;
 
   display: flex;
   flex-direction: column;
   transition: all 1.5s ease;
   transform: translateY(${(props) => props.slideIndex * -100}vh);
-
-
-  
 `;
 
 const SlideB = styled.div`
@@ -65,7 +50,7 @@ const SlideB = styled.div`
   height: 300vh;
   display: flex;
 
-  background: #FFF8EB;
+  background: #fff8eb;
 
   display: flex;
   flex-direction: column;
@@ -73,17 +58,16 @@ const SlideB = styled.div`
 
   align-items: center;
   background-color: #${(props) => props.bg};
-  /* background:url(${props => props.img}) ; */
+  /* background:url(${(props) => props.img}) ; */
   /* background: inherit; */
-
 `;
 
 const SlideContBox = styled.div`
-padding-top: 15%;
-padding-bottom: 15%;
-padding-left:10%;
-padding-right: 11%;
-`
+  padding-top: 15%;
+  padding-bottom: 15%;
+  padding-left: 10%;
+  padding-right: 11%;
+`;
 
 const Slide = styled.div`
   width: 150vw;
@@ -91,13 +75,9 @@ const Slide = styled.div`
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
-  /* background:url(${props => props.img}) ; */
+  /* background:url(${(props) => props.img}) ; */
   /* background: inherit; */
-
 `;
-
-
-
 
 const Indicators = styled.div`
   position: absolute;
@@ -111,64 +91,50 @@ const Indicators = styled.div`
 `;
 
 const Indicator = styled.span`
-  width: ${props => props.isActive ? '70px' : '50px'};
+  width: ${(props) => (props.isActive ? "70px" : "50px")};
   height: 3px;
   margin: 0 5px;
 
-  background-color: ${props => props.isActive ? '#ffffff' : '#FFFFFF4D'};
+  background-color: ${(props) => (props.isActive ? "#ffffff" : "#FFFFFF4D")};
   cursor: pointer;
 `;
 
 const Emp = styled.div`
-background-color: #c5009a;
-height: 100vh;
-width: 50vw;
-`
+  background-color: #c5009a;
+  height: 100vh;
+  width: 50vw;
+`;
 
 const ContBoxCont = styled.p`
-
-font-family: Lexend;
-font-size: 16px;
-font-weight: 300;
-line-height: 24px;
-letter-spacing: 0em;
-text-align: left;
-color: #4F4F4F;
-margin-bottom: 4vh;
-
-
-
-
-
-`
+  font-family: Lexend;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #4f4f4f;
+  margin-bottom: 4vh;
+`;
 
 const Button = styled.div`
-background-color: #00337C;
-color: #FFFFFF;
-width: 35%;
-padding: 1.5vh;
-font-family: Lexend;
-font-size: 20px;
-font-weight: 500;
-line-height: 32px;
-letter-spacing: 1.25px;
-text-align: center;
-border-radius: 8px;
+  background-color: #00337c;
+  color: #ffffff;
+  width: 35%;
+  padding: 1.5vh;
+  font-family: Lexend;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 1.25px;
+  text-align: center;
+  border-radius: 8px;
+`;
 
-`
-
-
-
-
-const Solu = ({Items, interval = 5000}) => {
+const Solu = ({ Items, interval = 5000 }) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
-
-
   const handleClickOne = (index) => {
-
-    setSlideIndex(index)
-    
+    setSlideIndex(index);
   };
 
   useEffect(() => {
@@ -179,84 +145,51 @@ const Solu = ({Items, interval = 5000}) => {
     return () => clearInterval(timer);
   }, [interval, Items.length]);
 
-
   return (
     <Container>
-      
+      <WrapperTwo>
+        <WrapperA slideIndex={slideIndex}>
+          {Items.map((item) => (
+            <Slide bg={item.bg} key={item.id}>
+              <h2>{item.title}</h2>
+            </Slide>
+          ))}
+        </WrapperA>
 
-      
+        <WrapperB slideIndex={slideIndex}>
+          {Items.map((item) => (
+            <SlideB key={item.id}>
+              <SlideContBox>
+                <BoldSecondWord sentence={item.title} />
+                <ContBoxCont>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                  at augue lacinia urna porta tempor eu vitae risus. Lorem ipsum
+                  dolor sit amet, consectetur adipiscing elit. Aenean ac diam
+                  sit amet purus tincidunt vehicula id tempor lorem. Praesent
+                  ipsum tellus, congue a libero ut, congue dictum lorem. In
+                  lacus metus, tempor at imperdiet at, consectetur sit amet
+                  ligula.
+                </ContBoxCont>
+                <Button>TRY NOW</Button>
+              </SlideContBox>
+            </SlideB>
+          ))}
+        </WrapperB>
 
-
-      
-      <WrapperTwo >
-      <WrapperA slideIndex={slideIndex}>
-        
-
-        {Items.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
-
-            <h2>{item.title}</h2>
-
-
-          </Slide>
-        ))}
-
-
-
- 
-
-
-      </WrapperA>
-      
-      <WrapperB slideIndex={slideIndex}>
-        {Items.map((item) => (
-          <SlideB key={item.id}>
-
-            <SlideContBox>
-              <BoldSecondWord sentence={item.title} />
-              <ContBoxCont>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. 
-                Proin at augue lacinia urna porta tempor
-                eu vitae risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenean ac diam sit amet purus tincidunt vehicula id tempor lorem. Praesent ipsum tellus,
-                congue a libero ut, congue dictum lorem. In lacus metus, tempor at imperdiet at,
-                consectetur sit amet ligula.
-              </ContBoxCont>
-              <Button>
-                TRY NOW
-              </Button>
-
-            </SlideContBox>
-
-            
-
-
-          </SlideB>
-        ))}
-
-</WrapperB>
-
-      {/* <Arrow direction="right" onClick={() => handleClick("right")}>
+        {/* <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowForwardIosOutlined />
       </Arrow> */}
 
         <Indicators>
-            {Items.map((image, index) => (
-            <Indicator key={index} isActive={index === slideIndex} onClick={() => handleClickOne(index)} />
-            ))}
+          {Items.map((image, index) => (
+            <Indicator
+              key={index}
+              isActive={index === slideIndex}
+              onClick={() => handleClickOne(index)}
+            />
+          ))}
         </Indicators>
-
-
-
-
       </WrapperTwo>
-
-
-
-
-
-
     </Container>
   );
 };

@@ -38,3 +38,28 @@ export const REMOVEFAV = (iteam) => {
         payload: iteam
     }
 }
+
+
+export const loginSuccess = (accessToken) => {
+    return {
+        type: "LOG_SUCCESS",
+        payload: accessToken
+    }
+}
+
+// remove iteams
+export const loginFailure = (accessToken) => {
+    return {
+        type: "LOG_FAIL",
+        payload: accessToken
+    }
+}
+
+// remove individual iteam
+
+export const logout = (accessToken) => {
+    return {
+        type: "LOGOUT",
+        payload: accessToken
+    }
+}

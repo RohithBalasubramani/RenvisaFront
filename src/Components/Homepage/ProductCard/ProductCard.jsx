@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { useDispatch } from 'react-redux';
-import { ADD } from '../../../Redux/actions/action'
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { Rating } from '@mui/material';
- 
-const Container = styled.div`
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { ADD } from "../../../Redux/actions/action";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Rating } from "@mui/material";
 
-
-`
+const Container = styled.div``;
 
 const Instocktext = styled.p`
-color: green;
-opacity: 0;
-text-align: center;
-`
-
+  color: green;
+  opacity: 0;
+  text-align: center;
+`;
 
 const ContBoxBuy = styled.button`
   position: absolute;
@@ -29,7 +25,6 @@ const ContBoxBuy = styled.button`
   margin-top: 50%;
   width: 22vh;
 
-
   color: #000000;
   text-decoration: none;
   background: #ff9471;
@@ -40,62 +35,45 @@ const ContBoxBuy = styled.button`
   transition: 0.5s;
   z-index: 7;
 
-  &:hover {   
+  &:hover {
     background: #fe8b64;
-              }
+  }
 
-  &:hover ${Instocktext}{
+  &:hover ${Instocktext} {
     color: green;
 
-  opacity: 1;
+    opacity: 1;
   }
-`
-
+`;
 
 const CardImage = styled.img`
   height: 278px;
   margin-left: auto;
-  margin-top:auto;
-  margin-bottom:auto;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-right: auto;
   width: 300px;
   overflow: hidden;
   transition: height 1s;
+`;
 
-
-`
- 
 const Card = styled.div`
-
-
   position: relative;
   background: #ffffff;
   overflow: hidden;
   height: 550px;
   width: 390px;
-  border: 2px solid #F2F2F2;
+  border: 2px solid #f2f2f2;
 
   transition: height 2s;
   &:hover ${CardImage} {
-
-
-  height: 305px;
-  overflow: hidden;
-
-
+    height: 305px;
+    overflow: hidden;
   }
 
-  &:hover{
-
+  &:hover {
   }
-
-
-
-
-
-
-
-`
+`;
 const CardImgBox = styled.div`
   position: relative;
   width: 100%;
@@ -103,18 +81,17 @@ const CardImgBox = styled.div`
   justify-content: center;
   padding: 2vh;
 
-  background: #F2F2F2;
+  background: #f2f2f2;
 
   height: 60%;
   width: 100%;
   padding: 10px;
   z-index: 1;
-`
+`;
 
 const CardContBox = styled.div`
   position: relative;
   width: 100%;
-
 
   padding: 2vh;
   /* border-width: 0px, 0px, 1px, 1px;
@@ -128,9 +105,7 @@ const CardContBox = styled.div`
   /* border-width: 0px 3px 3px 3px;
   border-style: solid;
   border-color: #E0E0E0; */
-
-
-`
+`;
 const ContBoxHead = styled.div`
   font-family: Lexend;
   font-size: 20px;
@@ -144,33 +119,26 @@ const ContBoxHead = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-
-
-`
+`;
 const ContBoxPrice = styled.h2`
   font-size: 24px;
   color: white;
   font-weight: 700;
   letter-spacing: 1px;
-`
-
+`;
 
 const ProdBotDet = styled.div`
-
-    display: flex;
-    align-items: flex-start;
-    font-family: Lexend;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: left;
-
-`
-
+  display: flex;
+  align-items: flex-start;
+  font-family: Lexend;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
 
 const BrandDiv = styled.div`
-
   font-family: Lexend;
   font-size: 15px;
   font-weight: 400;
@@ -178,126 +146,98 @@ const BrandDiv = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #828282;
-
-
-`
-
-const ProdPrice = styled.div`
-    font-family: Lexend;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #333333;
-    margin-right: 10px;
-
-`
-
-
-const ProdPriceOld = styled.div`
-
-    font-family: Lexend;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-decoration: line-through;
-    color: #828282;
-
-
-`
-
-
-const RefNum = styled.div`
-
-    font-family: Lexend;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #828282;
-
-
-`
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
-
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
 `;
 
+const ProdPrice = styled.div`
+  font-family: Lexend;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #333333;
+  margin-right: 10px;
+`;
 
+const ProdPriceOld = styled.div`
+  font-family: Lexend;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-decoration: line-through;
+  color: #828282;
+`;
 
-const ProductCard = ({item}) => {
+const RefNum = styled.div`
+  font-family: Lexend;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #828282;
+`;
 
-  const [mydata, setmydata] = useState();
-  
-  
+const StyledLink = styled(Link)`
+  text-decoration: none;
 
-  useEffect(() => {
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 
-    axios
-    .get("https://dummyjson.com/products")
-    .then((res) => console.log(res.data.products))
-    
-  
-    
-  }, []);
+const ProductCard = ({ item }) => {
+  // const [mydata, setmydata] = useState();
 
-
+  // useEffect(() => {
+  //   axios
+  //     .get("https://dummyjson.com/products")
+  //     .then((res) => console.log(res.data.products));
+  // }, []);
 
   const dispatch = useDispatch();
 
-  const send = (e)=>{
+  const send = (e) => {
     // console.log(e);
     dispatch(ADD(e));
-
-  }
+  };
 
   return (
     <Container>
-        <Card>
-
-          <StyledLink to={`/products/${item.id}`}>        
+      <Card>
+        <StyledLink to={`/products/${item._id}`}>
           <CardImgBox>
             {/* <Image/> */}
-            <CardImage src={item.img}></CardImage>
+            <CardImage src={item.image}></CardImage>
           </CardImgBox>
-           
 
-
-            <CardContBox>
+          <CardContBox>
             {/* <ProdBotDetDivRight>asjkdnjk</ProdBotDetDivRight> */}
-
-              <RefNum>REF NUMBER:{item.refno}</RefNum>
-                <ContBoxHead>{item.rname}</ContBoxHead>
-                <Rating name="read-only" value={item.rating} readOnly precision={0.5}  />
-                <BrandDiv>{item.brand}</BrandDiv>
-                {/* <ContBoxPrice> */}
-                <ProdBotDet>
-
-                  
-                <ProdPrice>₹{item.price}</ProdPrice>
-                <ProdPriceOld>₹{item.oldprice}</ProdPriceOld>
-
-                </ProdBotDet>
-                  
-                  {/* 61.<small>98</small> €</ContBoxPrice> */}
-                
-            </CardContBox>
-            </StyledLink> 
-
-    
-
-        </Card>
-
-
+            <RefNum>HSN Code:{item.HSN_code}</RefNum>
+            <ContBoxHead>{item.name}</ContBoxHead>
+            <Rating
+              name="read-only"
+              value={item.rating}
+              readOnly
+              precision={0.5}
+            />
+            ({item.numReviews})<BrandDiv>{item.brand}</BrandDiv>
+            {/* <ContBoxPrice> */}
+            <ProdBotDet>
+              <ProdPrice>₹{item.discounted_price}</ProdPrice>
+              <ProdPriceOld>₹{item.price}</ProdPriceOld>
+            </ProdBotDet>
+            {/* 61.<small>98</small> €</ContBoxPrice> */}
+          </CardContBox>
+        </StyledLink>
+      </Card>
     </Container>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

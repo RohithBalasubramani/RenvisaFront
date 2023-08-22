@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Avatar } from '@mui/material'
 // import LoginHooks from './Loginhooks';
@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import { AddBusiness, HorizontalRule } from '@mui/icons-material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../../Services/axiosins';
 
 const Container = styled.div`
 font-family: 'Poppins';
@@ -30,8 +31,29 @@ const Wrapper = styled.div`
 const PassCont = styled.div`
   display: flex;
   text-align: left;
+  font-family: Lexend;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+  text-align: left;
+
 
 `
+const FirstName = styled.div`
+  flex: 2;
+  display: block;
+  margin-right: 1vh;
+
+`
+
+const LastName = styled.div`
+  flex: 3;
+  display: block;
+  margin-left: 1vh;
+
+`
+
 const PassContfor = styled.div`
     margin-right: 4%;
     margin-left: auto;
@@ -43,22 +65,26 @@ const OrDisp = styled.div`
 margin-top: 1vh;
 font-weight: 300;
 `
-const Title = styled.p`
-color: #09193D;
-font-size: 3.5vh;
-padding: 0vh;
-font-weight: 600;
-margin: 0.4vh;
-text-transform: capitalize;
-margin-bottom:2vh;
+const Title = styled.div`
+font-family: Lexend;
+font-size: 32px;
+font-weight: 500;
+line-height: 43px;
+letter-spacing: 0.02em;
+text-align: left;
 
 `
-const TitleSpan = styled.p`
-color: #3A8891;
-font-size: 3vh;
-padding: 0vh;
+
+const TitleSpan = styled.div`
+
+
+font-family: Lexend;
+font-size: 20px;
 font-weight: 400;
-margin: 1vh;
+line-height: 27px;
+letter-spacing: 0.02em;
+text-align: left;
+color: #828282;
 
 
 `
@@ -80,6 +106,45 @@ const Signup = () => {
     setState({ ...state, open: false });
   };
 
+  const navigate = useNavigate();
+	
+	const initialFormData = Object.freeze({
+		email: '',
+		password: '',
+    first_name: '',
+    last_name: '',
+	});
+
+	const [formData, updateFormData] = useState(initialFormData);
+
+	const handleChange = (e) => {
+		updateFormData({
+			...formData,
+			// Trimming any whitespace
+			[e.target.name]: e.target.value.trim(),
+		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(formData);
+
+		axiosInstance
+			.post(`users/register/`, {
+
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        email: formData.email,
+				password: formData.password,
+			})
+			.then((res) => {
+				// navigate('/login');
+				console.log(res);
+				console.log(res.data);
+			});
+	};
+
+
 
 
 
@@ -88,30 +153,75 @@ const Signup = () => {
   return (
     <Container>
          <Wrapper>
-          <Avatar sx={{marginBottom:"2vh",  height:"6rem", width:"6rem", display:"flex", marginLeft: "41%"}} />
+          {/* <Avatar sx={{marginBottom:"2vh",  height:"6rem", width:"6rem", display:"flex", marginLeft: "41%"}} /> */}
           <Title>Create an account</Title>
-          <OrDisp>(For Bulk Orders)</OrDisp>
-          <Button component={Link} to="/businesslogin" sx={{color:"white",background:"#FF9471",marginBottom:"5vh",marginTop:"1vh","&:hover":{color:"white",background:"#f47f58"}}}><AddBusiness/> Create a Business Account</Button>
-          <TitleSpan></TitleSpan>
+          {/* <OrDisp>(For Bulk Orders)</OrDisp>
+          <Button component={Link} to="/businesslogin" sx={{color:"white",background:"#FF9471",marginBottom:"5vh",marginTop:"1vh","&:hover":{color:"white",background:"#f47f58"}}}><AddBusiness/> Create a Business Account</Button> */}
+          <TitleSpan>Please enter details to sign up</TitleSpan>
           {/* <LoginHooks/> */}
 
 
 
-
+{/* 
           <OrDisp>
           <Divider>or Signup with Email</Divider> 
-          </OrDisp>
+          </OrDisp> */}
 
           </Wrapper>
           <PassCont>
+
+            <FirstName>
+            <p>First Name</p>
+            <TextField fullWidth
+                        id="first_name"
+                        name="first_name"
+                        onChange={handleChange}></TextField>
+            </FirstName>
+
+            <LastName>
+            <p>Last Name</p>
+            <TextField fullWidth
+                      id="last_name"
+                      name="last_name"
+                      onChange={handleChange}></TextField>
+            </LastName>      
+          </PassCont>
+          {/* <TextField fullWidth></TextField>          */}
+          <PassCont>
           <p>Please Enter your Email</p>
           </PassCont>
-          <TextField fullWidth></TextField>
+          <TextField fullWidth
+          						autoComplete="email"
+                      id="email"
+                      name="email"
+                      onChange={handleChange}>/</TextField>
 
           <PassCont>
-          <Checkbox/><p>Remember me</p>
+          <p>Password</p>
           </PassCont>
-          <Button onClick={handleClick({vertical: 'top', horizontal: 'right',})}
+          <TextField fullWidth
+                    name="password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={handleChange}></TextField>
+
+          <PassCont>
+          <p>Confirm Password</p>
+          </PassCont>
+          <TextField fullWidth
+                    name="password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"></TextField>
+{/* 
+          <PassCont>
+            <Checkbox/><p>Remember me</p>
+          </PassCont> */}
+          {/* <Button onClick={handleClick({vertical: 'top', horizontal: 'right',})}
+          sx={{color:"white",background:"#09193D",height:"8vh",fontSize:"3vh","&:hover":{color:"#white",background:"#11224a"}}} fullWidth>Sign Up</Button> */}
+
+        <Button onClick={handleSubmit}
           sx={{color:"white",background:"#09193D",height:"8vh",fontSize:"3vh","&:hover":{color:"#white",background:"#11224a"}}} fullWidth>Sign Up</Button>
 
 

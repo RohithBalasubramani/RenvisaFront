@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Avatar } from '@mui/material'
 // import LoginHooks from './Loginhooks';
 import { Checkbox, Divider, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Logo from './Logo';
+import axiosInstance from '../../Services/axiosins';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../Redux/actions/action';
 
  
 const Container = styled.div`
@@ -47,6 +51,7 @@ const PassContfor = styled.div`
     }
 
 `
+
 const OrDisp = styled.div`
 
 
@@ -86,15 +91,50 @@ text-align: left;
 
 
 
-const Login = () => {
+const Login = (props) => {
 
-    const [open, setOpen] = React.useState(false);
-    const handleClose = () => {
-      setOpen(false);
+
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const initialFormData = Object.freeze({
+      email: '',
+      password: '',
+    });
+  
+    const [formData, updateFormData] = useState(initialFormData);
+  
+    const handleChange = (e) => {
+      updateFormData({
+        ...formData,
+        [e.target.name]: e.target.value.trim(),
+      });
     };
-    const handleToggle = () => {
-      setOpen(!open);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(formData);
+  
+      axiosInstance
+        .post(`users/login/`, {
+          email: formData.email,
+          password: formData.password,
+        })
+        .then((res) => {
+          localStorage.setItem('refresh_token', res.data.refresh);
+          const accessToken = res.data.access;
+          dispatch(loginSuccess({ accessToken }));
+
+          axiosInstance.defaults.headers['Authorization'] =
+            'Bearer ' + localStorage.getItem('access_token');
+            navigate('/');
+            props.handleClose();
+            //console.log(res);
+          //console.log(res.data);
+        });
     };
+  
 
 
 
@@ -114,20 +154,31 @@ const Login = () => {
           <PassCont>
           Username
           </PassCont>
-          <TextField fullWidth></TextField>
+          <TextField fullWidth 					
+          	name="email"
+						autoComplete="email"
+						autoFocus
+						onChange={handleChange}></TextField>
           <PassCont>
           Password
           <PassContfor>
           <p>Forgot Password?</p>
           </PassContfor>
           </PassCont>
-          <TextField fullWidth></TextField>
+          <TextField fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          onChange={handleChange}></TextField>
           <PassCont>
           <Checkbox/><p>Remember me</p>
           </PassCont>
-          <Button sx={{color:"#F2DEBA", background:"#09193D", height:"7vh", fontSize:"3.5vh", fontWeight:"300", 
-           "&:hover": { background: "#11234d",
-  },}} fullWidth>Login</Button>
+          <Button 
+            onClick={handleSubmit}
+            sx={{color:"#F2DEBA", background:"#09193D", height:"7vh", fontSize:"3.5vh", fontWeight:"300", 
+            "&:hover": { background: "#11234d" }}} fullWidth>Login</Button>
 
 
           </Container>

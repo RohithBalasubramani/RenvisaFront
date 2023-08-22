@@ -1,19 +1,27 @@
 import { mobile } from "../../responsive";
 import CartTab from "./CartTab";
-import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { DLT, ADD, REMOVE } from '../../Redux/actions/action';
-import styled from 'styled-components';
-import Menu from '@mui/icons-material/Menu';
-import { IconButton, Tab, Table, TableRow, TableCell, TableBody, TableHead} from '@mui/material';
-import { Delete } from '@mui/icons-material';
-import cartgif from "../../Assets/cart.gif"
-import Avatar from '@mui/material/Avatar';
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { DLT, ADD, REMOVE } from "../../Redux/actions/action";
+import styled from "styled-components";
+import Menu from "@mui/icons-material/Menu";
+import {
+  IconButton,
+  Tab,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead,
+} from "@mui/material";
+import { Delete } from "@mui/icons-material";
+import cartgif from "../../Assets/cart.gif";
+import Avatar from "@mui/material/Avatar";
 
 const Container = styled.div`
-height: max-content;
-width: 100%;
+  height: max-content;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
@@ -22,29 +30,26 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    display: flex;
-    font-family: Lexend;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 52px;
-    letter-spacing: 0.02em;
-    text-align: justified;
-    color: #00337C;
-
+  display: flex;
+  font-family: Lexend;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: 0.02em;
+  text-align: justified;
+  color: #00337c;
 `;
 
 const TitSpan = styled.div`
-font-family: Lexend;
-font-size: 24px;
-font-weight: 400;
-line-height: 39px;
-letter-spacing: 0.02em;
-text-align: justified;
-color: #333333;
-margin-top: 7px;
-
-
-`
+  font-family: Lexend;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 39px;
+  letter-spacing: 0.02em;
+  text-align: justified;
+  color: #333333;
+  margin-top: 7px;
+`;
 
 const Top = styled.div`
   display: flex;
@@ -64,10 +69,9 @@ const TopButton = styled.button`
     props.type === "filled" ? "#09193D" : "transparent"};
   color: ${(props) => props.type === "filled" && "white"};
   &:hover {
-
-background-color: #09193D;
-color: #ffffff;
-}
+    background-color: #09193d;
+    color: #ffffff;
+  }
 `;
 
 const TopTexts = styled.div`
@@ -83,7 +87,6 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
-
 `;
 
 const Info = styled.div`
@@ -161,21 +164,18 @@ const Summary = styled.div`
   flex: 1;
   padding: 20px;
   height: max-content;
-  background: #ffffff;;
-
-  
+  background: #ffffff;
 `;
 
 const SummaryTitle = styled.div`
-font-family: Lexend;
-font-size: 32px;
-font-weight: 500;
-line-height: 52px;
-letter-spacing: 0.02em;
-text-align: justified;
-padding: 2vh;
-border-bottom: 1px solid #E0E0E0;
-
+  font-family: Lexend;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: 0.02em;
+  text-align: justified;
+  padding: 2vh;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 const SummaryItem = styled.div`
@@ -186,7 +186,6 @@ const SummaryItem = styled.div`
   border-bottom: ${(props) => props.type === "total" && " 1px solid #E0E0E0"};
   padding-top: ${(props) => props.type === "total" && " 2vh"};
   padding-bottom: ${(props) => props.type === "total" && "2vh"};
-
 `;
 
 const SummaryItemText = styled.div`
@@ -198,18 +197,15 @@ const SummaryItemText = styled.div`
   text-align: left;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "24px"};
-
-
-`
+`;
 
 const SummaryItemPrice = styled.div`
-font-family: Lexend;
-font-size: 16px;
-font-weight: 500;
-line-height: 28px;
-letter-spacing: 0em;
-text-align: left;
-
+  font-family: Lexend;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
 `;
 
 const Button = styled.button`
@@ -225,25 +221,19 @@ const Button = styled.button`
   border: 0ch;
   border-radius: 8px;
 
-  background: #F5A91D;
-  color: #00337C;
+  background: #f5a91d;
+  color: #00337c;
 
   &:hover {
-
-
-    border: 2px solid #00337C;
+    border: 2px solid #00337c;
   }
 `;
 
-
-
-
 const CartTab2 = () => {
-
-  const [price,setPrice] = useState(0);
+  const [price, setPrice] = useState(0);
   console.log(price);
 
-  const getdata = useSelector((state)=> state.cartreducer.carts);
+  const getdata = useSelector((state) => state.cartreducer.carts);
   // console.log(getdata);
 
   const dispatch = useDispatch();
@@ -251,47 +241,44 @@ const CartTab2 = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-      setAnchorEl(null);
+    setAnchorEl(null);
   };
 
-
-  const dlt = (id)=>{
-      dispatch(DLT(id))
-  }
-
-  const add = (id)=>{
-      dispatch(ADD(id))
-  }
-
-  const rmv = (id)=>{
-      dispatch(REMOVE(id))
-  }
-
-  
-  const total = ()=>{
-      let price = 0;
-      getdata.map((ele,k)=>{
-          price = ele.price * ele.qnty + price
-      });
-      setPrice(price);
+  const dlt = (id) => {
+    dispatch(DLT(id));
   };
 
-  useEffect(()=>{
-      total();
-  },[total])
+  const add = (id) => {
+    dispatch(ADD(id));
+  };
 
+  const rmv = (id) => {
+    dispatch(REMOVE(id));
+  };
 
+  const total = () => {
+    let price = 0;
+    getdata.map((ele, k) => {
+      price = ele.price * ele.qnty + price;
+    });
+    setPrice(price);
+  };
 
+  useEffect(() => {
+    total();
+  }, [total]);
 
   return (
     <Container>
-
       <Wrapper>
-
-        <Title> <div>Cart:</div><TitSpan>({getdata.length})</TitSpan></Title>
+        <Title>
+          {" "}
+          <div>Cart:</div>
+          <TitSpan>({getdata.length})</TitSpan>
+        </Title>
         {/* <Top>
           <Link to="/">
           <TopButton>CONTINUE SHOPPING</TopButton>
@@ -301,9 +288,7 @@ const CartTab2 = () => {
         </Top> */}
         <Bottom>
           <Info>
-
-            <CartTab/>
-
+            <CartTab />
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
@@ -313,25 +298,24 @@ const CartTab2 = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Total GST</SummaryItemText>
-              <SummaryItemPrice>₹  {Math.ceil((price)*0.18)}</SummaryItemPrice>
+              <SummaryItemPrice>₹ {Math.ceil(price * 0.18)}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹  0</SummaryItemPrice>
+              <SummaryItemPrice>₹ 0</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText> Discount</SummaryItemText>
-              <SummaryItemPrice>₹  0</SummaryItemPrice>
+              <SummaryItemPrice>₹ 0</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText type="total">Total</SummaryItemText>
-              <SummaryItemPrice>₹  {Math.ceil(price)}</SummaryItemPrice>
+              <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
-
     </Container>
   );
 };
