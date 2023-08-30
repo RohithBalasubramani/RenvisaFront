@@ -169,7 +169,12 @@ const Home = () => {
           ))} */}
 
         <Carousel cards={Prod} />
+
         {/* </ProdWrapper> */}
+        {/* <InfiniteMove/> */}
+        <BrandCont>
+          <MovingDiv />
+        </BrandCont>
 
         <FilterBoxBrand className={isClicked ? "clicked" : ""}>
           <Head>
@@ -186,11 +191,6 @@ const Home = () => {
         <Solu Items={sliderItems} />
 
         <WhyUs />
-
-        {/* <InfiniteMove/> */}
-        <BrandCont>
-          <MovingDiv />
-        </BrandCont>
 
         <HeadTwo>Why Customers Love Renvisa </HeadTwo>
         <Review />
