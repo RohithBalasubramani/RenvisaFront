@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -41,16 +41,18 @@ import SearchAppBar from "./SearchAppBar";
 import { useEffect } from "react";
 import MenuDiv from "../Toolbar/MenuExample/MenuDiv";
 import { ReactComponent as RenLogo } from "../../Assets/RenLogo.svg";
+import { logout } from "../../Redux/actions/action";
 
 const HeaderBar = styled.div`
   background: rgb(255, 255, 255, ${(props) => props.bg});
   position: fixed;
   /* border-bottom: ${(props) => props.bor} solid #4f4f4f; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
   width: 100vw;
   padding-right: 1.5vh;
-  padding-top: 0.5;
-  padding-bottom: 0.5vh;
-  box-shadow: 0px 15px 10px -15px #111;
+  padding-left: 1.5vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 
   font-family: "Lexend";
   font-style: normal;
@@ -67,12 +69,10 @@ const HeaderBar = styled.div`
 
 const MenuCont = styled.div`
   color: ${(props) => props.col};
-  margin-left: 3vh;
+  padding-right: 3vh;
 `;
 
 const SignCont = styled.div`
-  margin-left: auto;
-  margin-right: 0;
   display: flex;
   align-items: center;
   text-align: center;
@@ -150,19 +150,21 @@ const Dropdownontenta = styled.div`
 `;
 
 const Title = styled.div`
-  padding-left: 1vh;
-  display: block;
+  display: flex;
+  vertical-align: middle;
+  padding-right: 3vh;
   text-align: left;
   color: ${(props) => props.col};
 `;
 const TitHead = styled.div`
-  color: #000;
-  font-family: Lexend;
+  color: inherit;
+  font-family: Urbanist;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.48px;
+  margin-top: 5px;
 `;
 
 const OrDisp = styled.div`
@@ -266,14 +268,20 @@ function HeaderTwo() {
   const [value, setValue] = React.useState(0);
   console.log(value);
 
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const authStatus = useSelector((state) => state.authreducer.isAuthenticated);
+
   return (
     <HeaderBar bg={1} bor={"2px"}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Logo />
-
           <StyledLink to="/">
             <Title col={"#333333"}>
+              <Logo />
               <TitHead>Renvisa </TitHead>
             </Title>
           </StyledLink>
@@ -287,7 +295,7 @@ function HeaderTwo() {
             />
 
             <MenuCont col={"#333333"}>
-              <MenuDiv colo={"#E0E0E0"} arccol={"#F0F0F0"} />
+              <MenuDiv colo={"#E0E0E0"} arccol={"#828282"} />
             </MenuCont>
 
             {/* DropDown */}
@@ -372,36 +380,29 @@ function HeaderTwo() {
                   },
                 }}
               >
-                <MenuItem onClick={handleToggle}>
-                  <Avatar /> Login
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <LocalMall />
-                  </ListItemIcon>{" "}
-                  Orders
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <Favorite />
-                  </ListItemIcon>
-                  Settings
-                </MenuItem>
+                {authStatus ? (
+                  <>
+                    <MenuItem>
+                      <ListItemIcon>
+                        <LocalMall />
+                      </ListItemIcon>{" "}
+                      Orders
+                    </MenuItem>
 
-                <Divider />
+                    <Divider />
 
-                <MenuItem>
-                  <ListItemIcon>
-                    <Settings fontSize="small" />
-                  </ListItemIcon>
-                  Settings
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <Logout fontSize="small" />
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
+                    <MenuItem onClick={handleLogout}>
+                      <ListItemIcon>
+                        <Logout fontSize="small" />
+                      </ListItemIcon>
+                      Logout
+                    </MenuItem>
+                  </>
+                ) : (
+                  <MenuItem onClick={handleToggle}>
+                    <Avatar /> Login
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
 

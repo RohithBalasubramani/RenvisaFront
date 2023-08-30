@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Carousel from "../Components/Homepage/ProductCard/SlideCards";
 
 const Container = styled.div`
   background: #ffffff;
@@ -80,15 +81,32 @@ const HeadCon = styled.div`
   z-index: 100;
 `;
 
-const ProdWrapper = styled.div`
-  display: flex;
-  gap: 2vh;
-  padding: 4vh;
-  padding-left: 3vh;
+const CarCont = styled.div`
+  width: 100vw;
+  overflow-x: hidden;
 `;
 
 const BrandCont = styled.div`
   overflow-x: hidden;
+`;
+
+const FilterBoxBrand = styled.div`
+  overflow-y: hidden;
+  margin-bottom: 2vh;
+  max-height: 92vh;
+
+  .other-component {
+    max-height: calc(32vw * 2);
+    overflow: hidden;
+  }
+
+  &.clicked {
+    max-height: calc(30vw * 4);
+
+    .other-component {
+      max-height: calc(30vw * 4);
+    }
+  }
 `;
 
 const Home = () => {
@@ -101,6 +119,17 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
+  const [seeMore, setSeeMore] = useState("See More");
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    if (seeMore === "View Less") {
+      setSeeMore("See More");
+    } else {
+      setSeeMore("View Less");
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -118,7 +147,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const Prod = data.slice(0, 6);
+  const Prod = data.slice(0, 12);
 
   return (
     <>
@@ -128,32 +157,31 @@ const Home = () => {
 
       <Slide>
         <Slider Items={sliderItems} />
+        <ScrollButton />
       </Slide>
-      <ScrollButton />
 
       <Container>
         {/* <Trail/> */}
 
-        <Head>
-          Best Seller{" "}
-          <HeadSpan onClick={handleViewProd}>
-            <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
-          </HeadSpan>
-        </Head>
-
-        <ProdWrapper>
-          {Prod.map((items) => (
+        {/* <ProdWrapper> */}
+        {/* {Prod.map((items) => (
             <ProdCardTwo item={items} />
-          ))}
-        </ProdWrapper>
+          ))} */}
 
-        <Head>
-          Categories{" "}
-          <HeadSpan>
-            <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
-          </HeadSpan>
-        </Head>
-        <TrendingCard />
+        <Carousel cards={Prod} />
+        {/* </ProdWrapper> */}
+
+        <FilterBoxBrand className={isClicked ? "clicked" : ""}>
+          <Head>
+            Categories{" "}
+            <HeadSpan onClick={handleClick}>
+              <div>{seeMore}</div> <ChevronRight sx={{ marginTop: "5px" }} />
+            </HeadSpan>
+          </Head>
+          <div className="other-component">
+            <TrendingCard />
+          </div>
+        </FilterBoxBrand>
 
         <Solu Items={sliderItems} />
 

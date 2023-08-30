@@ -5,6 +5,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { Products5 } from "../../data";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../Redux/actions/action";
 
 const Cont = styled("div")`
   background-color: ${(props) => props.bg};
@@ -13,6 +15,7 @@ const Cont = styled("div")`
   border-radius: 8px;
   border-width: 2px;
   border-style: solid;
+  margin-left: 1vh;
   border-color: ${(props) => props.bor};
 `;
 
@@ -21,7 +24,7 @@ const Wrapper = styled("div")`
   border-radius: 8px;
 
   height: 50vh;
-  width: 32.5%;
+  width: 40%;
   padding: 2vh;
   position: absolute;
   top: 9vh;
@@ -79,12 +82,13 @@ const StyLink = styled("a")`
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "#000000",
   fontFamily: "Lexend",
+  fontSize: "12px",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: "1vw",
     transition: theme.transitions.create("width"),
-    width: "27vw",
+    width: "33vw",
 
     [theme.breakpoints.up("sm")]: {
       "&:focus": {
@@ -98,6 +102,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar({ SearchBgCol, SearchCol, SearchBorCol }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSubMenuOpen1, setIsSubMenuOpen1] = useState(false);
+
+  // const dispatch = useDispatch();
+  // const { loading, data, error } = useSelector((state) => state.data);
+  // useEffect(() => {
+  //   dispatch(fetchData());
+  // }, [dispatch]);
 
   const navigate = useNavigate();
 

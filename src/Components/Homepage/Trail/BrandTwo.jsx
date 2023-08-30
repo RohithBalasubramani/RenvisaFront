@@ -2,28 +2,32 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Products5 } from "../../../data";
 import Product from "../../../Pages/ProductDescription";
+import { Brands } from "./Brands/BrandData";
 
 const ContainerWhole = styled.div`
   overflow-x: hidden;
-  background-color: #fff8eb;
-  padding-right: 100vh;
-  padding-bottom: 8vh;
+  background: #f1faff;
+  padding-bottom: 5vh;
 `;
 
 const BrandHead = styled.div`
-  font-family: Lexend;
-  font-size: 60px;
-  font-weight: 500;
-  line-height: 80px;
-  letter-spacing: 0;
-  text-align: center;
   color: #00337c;
+  font-family: Lexend;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 135.5%; /* 48.78px */
+  padding: 5vh;
+  padding-bottom: 0%;
+  display: flex;
   width: 100vw;
-  margin-left: 0vw;
+`;
+
+const Center = styled.div`
+  margin: auto;
 `;
 
 const Container = styled.div`
-  background-color: #fff8eb;
   height: 40vh;
   width: 400vh;
   display: block;
@@ -33,49 +37,57 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  height: 10vh;
+  height: 12vh;
   width: 20vh;
-  background-color: black;
   margin-left: 10vh;
+  background-image: url(${(props) => props.bg});
+  /* background-size: contain; */
+  background-size: 20vh 12vh;
 `;
 
 const WrapperContainer = styled.div`
+  margin-left: 3vh;
   display: flex;
-  margin-top: 10vh;
+  margin-top: 5vh;
 `;
 const WrapperContainerTwo = styled.div`
-  padding-left: 15vh;
+  margin-left: -5vh;
   display: flex;
-  margin-top: 10vh;
+  margin-top: 8vh;
 `;
 
 const BrandTwo = () => {
   const [position, setPosition] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPosition((position) => position + 1);
-    }, 10);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setPosition((position) => position + 1);
+  //   }, 10);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
+  const slicedBrands = Brands.slice(0, 6);
+  const slicedBrands2 = Brands.slice(6, 13);
   return (
     <ContainerWhole>
-      <Container pos={position}>
+      <BrandHead>
+        <Center>Choose from 10+ Brands</Center>
+      </BrandHead>
+
+      <Container>
         <WrapperContainer>
-          {Products5.map((product) => (
-            <Wrapper />
+          {slicedBrands.map((product) => (
+            <Wrapper bg={product.img} />
           ))}
         </WrapperContainer>
 
         <WrapperContainerTwo>
-          {Products5.map((product) => (
-            <Wrapper />
+          {slicedBrands2.map((product) => (
+            <Wrapper bg={product.img} />
           ))}
         </WrapperContainerTwo>
       </Container>
-      <BrandHead>Choose from 10+ Brands</BrandHead>
     </ContainerWhole>
   );
 };

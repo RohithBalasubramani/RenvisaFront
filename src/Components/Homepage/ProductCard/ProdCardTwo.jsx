@@ -21,27 +21,11 @@ const CardImage = styled.img`
   margin-right: auto;
   object-fit: contain;
   height: 80%;
+  width: 90%;
   overflow: hidden;
   transition: height 1s;
 `;
 
-const Card = styled.div`
-  position: relative;
-  background: #ffffff;
-  overflow: hidden;
-  height: 26vw;
-  width: 15vw;
-  border: 2px solid #f2f2f2;
-
-  transition: height 2s;
-  &:hover ${CardImage} {
-    /* height: 305px;
-    overflow: hidden; */
-  }
-
-  &:hover {
-  }
-`;
 const CardImgBox = styled.div`
   position: relative;
   width: 100%;
@@ -65,7 +49,8 @@ const CardContBox = styled.div`
   border-style: solid;
   border-color: #E0E0E0; */
 
-  display: block;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: left;
   font-family: Lexend;
@@ -73,6 +58,13 @@ const CardContBox = styled.div`
   border-style: solid;
   border-color: #E0E0E0; */
 `;
+
+const RatDiv = styled.div`
+  flex: 0;
+  z-index: 3;
+  opacity: 0;
+`;
+
 const ContBoxHead = styled.div`
   color: #000;
   font-family: Lexend;
@@ -80,6 +72,8 @@ const ContBoxHead = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 18px; /* 175% */
+  min-height: 36px;
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -102,6 +96,7 @@ const ProdBotDet = styled.div`
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+  flex: 2;
 `;
 
 const BrandDiv = styled.div`
@@ -114,6 +109,7 @@ const BrandDiv = styled.div`
   text-overflow: ellipsis; /* enables ellipsis */
   white-space: nowrap; /* keeps the text in a single line */
   overflow: hidden;
+  flex: 1;
 `;
 
 const ProdPrice = styled.div`
@@ -144,6 +140,37 @@ const RefNum = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 28px; /* 233.333% */
+`;
+
+const Card = styled.div`
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+  height: 22vw;
+  width: 15vw;
+
+  transition: height 2s;
+  &:hover ${CardImgBox} {
+    height: 55%;
+    transition: height 0.5s;
+  }
+
+  &:hover ${CardImage} {
+    width: 75%;
+    transition: width 0.5s;
+  }
+
+  &:hover ${RatDiv} {
+    opacity: 1;
+    flex: 1;
+    transition: 0.5s;
+    padding-bottom: 1vh;
+    padding-top: 0.5vh;
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -178,9 +205,13 @@ const ProdCardTwo = ({ item }) => {
           <CardContBox>
             {/* <ProdBotDetDivRight>asjkdnjk</ProdBotDetDivRight> */}
 
-            <RefNum>HSN Code:{item.HSN_code}</RefNum>
+            {/* <RefNum>HSN Code:{item.HSN_code}</RefNum> */}
+            <RatDiv>
+              <StyRating value={item.rating} />
+            </RatDiv>
+
             <ContBoxHead>{item.name}</ContBoxHead>
-            <StyRating value={item.rating} />
+
             <BrandDiv>{item.brand}</BrandDiv>
             {/* <ContBoxPrice> */}
             <ProdBotDet>

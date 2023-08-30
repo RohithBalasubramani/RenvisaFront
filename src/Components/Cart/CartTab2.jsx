@@ -5,6 +5,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { DLT, ADD, REMOVE } from "../../Redux/actions/action";
 import styled from "styled-components";
+import { ReactComponent as CartEmpty } from "../../Assets/EmptyCart.svg";
+
 import Menu from "@mui/icons-material/Menu";
 import {
   IconButton,
@@ -220,6 +222,7 @@ const Button = styled.button`
   text-align: left;
   border: 0ch;
   border-radius: 8px;
+  text-decoration: none;
 
   background: #f5a91d;
   color: #00337c;
@@ -227,6 +230,48 @@ const Button = styled.button`
   &:hover {
     border: 2px solid #00337c;
   }
+`;
+
+const EmptyCart = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70vh;
+`;
+
+const CartItems = styled.div`
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+`;
+
+const EmptyText = styled.div`
+  color: #011f46;
+  font-family: Lexend;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin: auto;
+`;
+
+const ButtonEmpty = styled.div`
+  width: 15vw;
+  background-color: #f5a91d;
+  border-radius: 8px;
+  color: #1e1e1e;
+  padding: 2vh;
+  color: #1e1e1e;
+  font-family: Lexend;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 200% */
+  text-align: center;
+  margin: auto;
 `;
 
 const CartTab2 = () => {
@@ -273,49 +318,61 @@ const CartTab2 = () => {
 
   return (
     <Container>
-      <Wrapper>
-        <Title>
-          {" "}
-          <div>Cart:</div>
-          <TitSpan>({getdata.length})</TitSpan>
-        </Title>
-        {/* <Top>
+      {getdata.length ? (
+        <Wrapper>
+          <Title>
+            {" "}
+            <div>Cart:</div>
+            <TitSpan>({getdata.length})</TitSpan>
+          </Title>
+          {/* <Top>
           <Link to="/">
           <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
 
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top> */}
-        <Bottom>
-          <Info>
-            <CartTab />
-          </Info>
-          <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Total GST</SummaryItemText>
-              <SummaryItemPrice>₹ {Math.ceil(price * 0.18)}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ 0</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText> Discount</SummaryItemText>
-              <SummaryItemPrice>₹ 0</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText type="total">Total</SummaryItemText>
-              <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
-            </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
-          </Summary>
-        </Bottom>
-      </Wrapper>
+          <Bottom>
+            <Info>
+              <CartTab />
+            </Info>
+            <Summary>
+              <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+              <SummaryItem>
+                <SummaryItemText>Subtotal</SummaryItemText>
+                <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Total GST</SummaryItemText>
+                <SummaryItemPrice>₹ {Math.ceil(price * 0.18)}</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Estimated Shipping</SummaryItemText>
+                <SummaryItemPrice>₹ 0</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText> Discount</SummaryItemText>
+                <SummaryItemPrice>₹ 0</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem type="total">
+                <SummaryItemText type="total">Total</SummaryItemText>
+                <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
+              </SummaryItem>
+              <Button>CHECKOUT NOW</Button>
+            </Summary>
+          </Bottom>
+        </Wrapper>
+      ) : (
+        <EmptyCart>
+          <CartItems>
+            <CartEmpty />
+            <EmptyText>The Cart is Empty</EmptyText>
+            <Link to="/">
+              <ButtonEmpty>Continue Shopping</ButtonEmpty>
+            </Link>
+          </CartItems>
+        </EmptyCart>
+      )}
     </Container>
   );
 };

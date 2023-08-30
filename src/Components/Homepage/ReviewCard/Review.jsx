@@ -1,10 +1,9 @@
 import { Avatar, Rating } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import LC from "../../../Assets/lc.jpg";
-import LCC from "../../../Assets/Review/Office1.jpg";
 
 import { ReviewData } from "../../../data";
+import StyRating from "../ProductCard/StyRating";
 
 const Container = styled.div`
   font-family: "Poppins";
@@ -25,15 +24,16 @@ const Cards = styled.div`
   list-style-type: none;
 `;
 const CardOverlay = styled.div`
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
-  background-color: #fff8eb;
-
+  z-index: 1; */
+  background-color: #f1faff;
+  height: 60%;
+  /* 
   transform: translateY(100%);
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out; */
 `;
 const CardHeader = styled.div`
   position: relative;
@@ -42,15 +42,15 @@ const CardHeader = styled.div`
 
   gap: 2em;
   padding: 2em;
-  background-color: #fff8eb;
-  transform: translateY(-100%);
-  transition: 0.2s ease-in-out;
+  background-color: #f1faff;
+  /* transform: translateY(-100%);
+  transition: 0.2s ease-in-out; */
 `;
 
 const Card = styled.div`
   position: relative;
   display: block;
-  height: 40vh;
+  height: 60vh;
   width: 60vh;
   border-width: 1px, 1px, 1px, 1px;
   border-style: solid;
@@ -58,18 +58,28 @@ const Card = styled.div`
   border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
+  background-color: #f1faff;
 
-  &:hover ${CardOverlay} {
+  /* &:hover ${CardOverlay} {
     transform: translateY(0);
   }
 
   &:hover ${CardHeader} {
     transform: translateY(0);
-  }
+  } */
 `;
+
+const ImgCon = styled.div`
+  height: 40%;
+  background-color: white;
+  display: flex;
+`;
+
 const CardImg = styled.img`
-  width: 100%;
-  height: auto;
+  width: 60%;
+  height: 100%;
+  padding: 5vh;
+  margin: auto;
 `;
 
 const CardTitle = styled.div`
@@ -91,7 +101,7 @@ const CardStatus = styled.span`
   font-size: 0.8em;
   color: #ffffff;
 `;
-const CardDes = styled.p`
+const CardDes = styled.div`
   padding: 0 2em 2em;
   margin: 0;
   color: #ffffff;
@@ -100,7 +110,7 @@ const CardDes = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  background-color: #fff8eb;
+  background-color: #f1faff;
 
   font-family: "Lexend";
   font-style: normal;
@@ -122,7 +132,9 @@ const Review = () => {
       <Cards>
         {ReviewData.map((item) => (
           <Card>
-            <CardImg src={LCC} />
+            <ImgCon>
+              <CardImg src={item.imgOf} />
+            </ImgCon>
             <CardOverlay>
               <CardHeader>
                 <Avatar
@@ -133,12 +145,7 @@ const Review = () => {
                 <CardTagline>
                   <CardTitle>{item.name}</CardTitle>
                   <CardStatus>
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={5}
-                      precision={0.5}
-                      readOnly
-                    />
+                    <StyRating value={5} />
                   </CardStatus>
                 </CardTagline>
               </CardHeader>

@@ -28,6 +28,9 @@ import ProductCard from "../Components/Homepage/ProductCard/ProductCard";
 import { Products4 } from "../data";
 import HeaderTwo from "../Components/Header/HeaderTwo";
 import SimilarProd from "../Components/PDP/SimilarProd";
+import axios from "axios";
+import { useEffect } from "react";
+import { Alert, Snackbar } from "@mui/material";
 
 const ContainerWhole = styled.div`
   width: 100%;
@@ -443,6 +446,7 @@ const TDone = styled.td`
   line-height: 32px;
   letter-spacing: 0em;
   margin-right: 2vh;
+  width: 20vw;
 
   color: #000000;
 `;
@@ -454,6 +458,7 @@ const TDtwo = styled.td`
   line-height: 32px;
   letter-spacing: 0em;
   text-align: justified;
+  width: 20vw;
 
   color: #4f4f4f;
 `;
@@ -525,9 +530,18 @@ const ProdWrapper = styled.div`
 `;
 
 const ProductDescription = ({ products }) => {
-  const data = Products4;
-  const [quantity, setQuantity] = useState(0);
-  const [limitedData, setLimitedData] = useState(data.slice(0, 3));
+  const [quantity, setQuantity] = useState(1);
+  // const [limitedData, setLimitedData] = useState(data.slice(0, 3));
+  const [open, setOpen] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   const getdata = useSelector((state) => state.cartreducer.carts);
 
@@ -537,12 +551,7 @@ const ProductDescription = ({ products }) => {
     // console.log(e);
     console.log(getdata[0]);
 
-    dispatch(ADD(e));
-  };
-
-  const add = (prod) => {
-    setQuantity(quantity + 1);
-    // dispatch(ADD(prod));
+    dispatch(ADD({ ...e, qnty: quantity }));
   };
 
   const rmv = (_id) => {
@@ -558,11 +567,61 @@ const ProductDescription = ({ products }) => {
 
   const { _id } = useParams();
   const product = products.find((product) => product._id === parseInt(_id));
+  const referenceProductSubcategory = product.sub_category;
   //   console.log(product);
+  const productsWithSameSubcategory = products.filter((product) => {
+    return product.sub_category === referenceProductSubcategory;
+  });
+
+  const add = (prod) => {
+    setQuantity(quantity + 1);
+
+    // dispatch(ADD(prod));
+  };
 
   function formatIndianNumber(number) {
     return number.toLocaleString("en-IN");
   }
+
+  const handleQuotationRequest = () => {
+    const token = localStorage.getItem("access_token");
+
+    const data = {
+      product: product._id,
+      user: 9,
+    };
+
+    const apiUrl = "https://renvisa.org/quotation-requests/";
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .post(apiUrl, data, config)
+      .then((response) => {
+        console.log("Success:", response.data);
+        setResponseMessage(response.data);
+        setSeverity("success");
+        setOpen(true);
+      })
+      .catch((error) => {
+        console.log("Error:", error.response.data);
+        setResponseMessage(error.response.data);
+        setSeverity("error");
+        setOpen(true);
+
+        // Handle error, e.g., show an error message to the user
+      });
+  };
+
+  useEffect(() => {
+    product.qnty = quantity;
+  }, [quantity]);
+
+  console.log(product);
 
   return (
     <ContainerWhole>
@@ -646,7 +705,9 @@ const ProductDescription = ({ products }) => {
                 Once you submit request, our agent will contact to you.
               </BulkSecondLine>
             </BulkLineOne>
-            <BulkButton>Submit Request</BulkButton>
+            <BulkButton onClick={handleQuotationRequest}>
+              Submit Request
+            </BulkButton>
           </BulkContainer>
 
           <SectionTwo>
@@ -655,52 +716,17 @@ const ProductDescription = ({ products }) => {
             <DivTable>
               <SpecTable>
                 {product.prospecs.map((items) => (
-                  <tr>
+                  <div>
                     <TDone>{items.label}</TDone>
                     <TDtwo>{items.value}</TDtwo>{" "}
-                  </tr>
+                  </div>
                 ))}
 
                 {/* <tr>
                   <TDone>Current at Max Power (Imp)&nbsp;&nbsp;</TDone>
                   <TDtwo>8.79 Amp</TDtwo>{" "}
                 </tr>
-                <tr>
-                  <TDone>Warranty</TDone>
-                  <TDtwo>Performance: 25 Years</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Number of Cells</TDone>
-                  <TDtwo>36</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Dimensions</TDone>
-                  <TDtwo>67 x 148 x 3 cm</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Cell Size</TDone>
-                  <TDtwo>156.75 x 156.75 mm</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Maximum System Voltage</TDone>
-                  <TDtwo>1000 V DC</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Fuse Rating</TDone>
-                  <TDtwo>15 Amp</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Weight</TDone>
-                  <TDtwo>12 kg</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Package Contents</TDone>
-                  <TDtwo>Solar Panel</TDtwo>{" "}
-                </tr>
-                <tr>
-                  <TDone>Country of Origin</TDone>
-                  <TDtwo>India</TDtwo>{" "}
-                </tr>
+
                 <tr>
                   <TDone>Short Circuit Current (Isc)</TDone>
                   <TDtwo>9.34 Amp</TDtwo>{" "}
@@ -719,7 +745,12 @@ const ProductDescription = ({ products }) => {
           <RatingComponent reviews={reviewdatatrail} product={product} />
         </Wrapper>
       </Container>
-      <SimilarProd />
+      {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity}>
+          {responseMessage}
+        </Alert>
+      </Snackbar> */}
+      <SimilarProd data={productsWithSameSubcategory} />
     </ContainerWhole>
   );
 };

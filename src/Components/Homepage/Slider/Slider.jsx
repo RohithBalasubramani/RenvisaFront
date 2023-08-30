@@ -58,7 +58,8 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 85vh;
   display: flex;
-  transition: all 1.5s ease;
+  transition: all 100ms ease;
+  transition-delay: 450ms;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
@@ -79,9 +80,14 @@ const ImgContainer = styled.div`
   padding-top: 3vh;
 `;
 
-const Image = styled.img`
-  height: 70vh;
-  width: 90vh;
+const Center = styled.div`
+  width: 66%;
+  margin: auto;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transition: opacity 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
 `;
 
 const InfoContainer = styled.div`
@@ -90,23 +96,28 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.div`
-  font-family: Lexend;
-  font-size: 130px;
-  font-weight: 500;
-  line-height: 140px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-bottom: 8vh;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  font-family: Urbanist;
+  font-size: 90px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 72.5px; /* 80.556% */
+  width: 100%;
 `;
 
-const Desc = styled.p`
+const Desc = styled.div`
+  color: #fff;
+  text-align: center;
   font-family: Lexend;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.05em;
-  text-align: left;
-  width: 90vh;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.7px;
+  width: 33vw;
+  margin: auto;
 `;
 
 const ShopNow = styled.button`
@@ -125,7 +136,7 @@ const ShopNow = styled.button`
 
   color: #ffffff;
   text-transform: uppercase;
-  transition: 0.5s;
+  transition: 0.4s;
 
   &:hover {
     color: #09193d;
@@ -232,7 +243,9 @@ const ButtonCont = styled.div`
   display: flex;
   gap: 1vw;
   text-align: center;
-  margin-top: 3vh;
+  align-content: center;
+  align-self: center;
+  margin: auto;
   font-family: Lexend;
   font-size: 20px;
   font-weight: 500;
@@ -251,6 +264,7 @@ const ButtonCustomOne = styled.div`
   margin-top: auto;
   letter-spacing: 0;
   margin-bottom: auto;
+  cursor: pointer;
 `;
 
 const ButtonCustomTwo = styled.div`
@@ -265,61 +279,54 @@ const ButtonCustomTwo = styled.div`
   width: 17vw;
   margin-top: auto;
   margin-bottom: auto;
+  cursor: pointer;
 `;
 
 const Slider = ({ Items }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [selectedValue, setSelectedValue] = useState(0);
-
-  const handleClick = (direction, event) => {
-    if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
-      setSelectedValue(slideIndex > 0 ? slideIndex - 1 : 2);
-
-      console.log(slideIndex);
-    } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-      setSelectedValue(slideIndex < 2 ? slideIndex + 1 : 0);
-    }
-  };
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-
-  //     setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleClickOne = (index) => {
     setSelectedValue(index);
     setSlideIndex(index);
+    setIsVisible((prevState) => !prevState);
+    setTimeout(() => {
+      setIsVisible(true); // Fade back in after 1 second
+    }, 550);
   };
+
+  // Auto slide after 5 seconds
+  useEffect(() => {
+    const autoSlide = setInterval(() => {
+      const newIndex = (slideIndex + 1) % Items.length;
+      handleClickOne(newIndex);
+    }, 7000);
+
+    return () => clearInterval(autoSlide); // Clear the interval when component unmounts
+  }, [slideIndex, Items.length]);
 
   return (
     <Container>
       <WrapperTwo>
-        {/* <Arrow direction="left" onClick={() => handleClick("left")}>
-        <ArrowBackIosNewOutlined />
-      </Arrow> */}
-
         <Wrapper slideIndex={slideIndex}>
           {Items.map((item) => (
             <Slide bg={item.bg} key={item.id}>
               <InfoContainer>
-                <Title>{item.title}</Title>
-                <Desc>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Repudiandae aspernatur dolorem dolores! Tenetur inventore, sit
-                  eligendi, ea dicta totam quas autem illum, cumque obcaecati
-                  mollitia ex reprehenderit ipsam? Numquam, sed.
-                </Desc>
+                <Center isVisible={isVisible}>
+                  <Title>{item.title}</Title>
+                  <Desc>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Repudiandae aspernatur dolorem dolores! Tenetur inventore,
+                    sit eligendi, ea dicta totam quas autem illum, cumque
+                    obcaecati mollitia ex reprehenderit ipsam? Numquam, sed.
+                  </Desc>
 
-                <ButtonCont>
-                  <ButtonCustomOne>Explore</ButtonCustomOne>
-                  <ButtonCustomTwo>Join as a seller</ButtonCustomTwo>
-                </ButtonCont>
+                  <ButtonCont>
+                    <ButtonCustomOne>Explore</ButtonCustomOne>
+                    <ButtonCustomTwo>Join as a seller</ButtonCustomTwo>
+                  </ButtonCont>
+                </Center>
               </InfoContainer>
             </Slide>
           ))}

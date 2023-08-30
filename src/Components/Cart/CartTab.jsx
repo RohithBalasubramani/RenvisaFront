@@ -19,6 +19,7 @@ import cartgif from "../../Assets/cart.gif";
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import { ReactComponent as DeleteIcon } from "../../Assets/DeleteIcon.svg";
+import { ReactComponent as CartEmpty } from "../../Assets/EmptyCart.svg";
 
 const Container = styled.div`
   margin: 3px;
@@ -173,7 +174,8 @@ const ImageCont = styled.div`
 `;
 
 const Img = styled.img`
-  height: 80%;
+  height: 75%;
+  width: 75%;
 
   margin-left: auto;
   margin-right: auto;
@@ -197,6 +199,48 @@ const RFQButton = styled.button`
     font-weight: 600;
     border: 2px solid #003171;
   }
+`;
+
+const EmptyCart = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70vh;
+`;
+
+const CartItems = styled.div`
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+`;
+
+const EmptyText = styled.div`
+  color: #011f46;
+  font-family: Lexend;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin: auto;
+`;
+
+const Button = styled.div`
+  width: 15vw;
+  background-color: #f5a91d;
+  border-radius: 8px;
+  color: #1e1e1e;
+  padding: 2vh;
+  color: #1e1e1e;
+  font-family: Lexend;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 200% */
+  text-align: center;
+  margin: auto;
 `;
 
 const CartTab = () => {
@@ -343,29 +387,7 @@ const CartTab = () => {
             </Table>
           </div>
         ) : (
-          <div
-            className="card_details d-flex justify-content-center align-items-center"
-            style={{ width: "100%", padding: 10, position: "relative" }}
-          >
-            <i
-              className="fas fa-close smallclose"
-              onClick={handleClose}
-              style={{
-                position: "absolute",
-                top: 2,
-                right: 20,
-                fontSize: 23,
-                cursor: "pointer",
-              }}
-            ></i>
-            <p style={{ fontSize: 22 }}>Your carts is empty</p>
-            <img
-              src={cartgif}
-              alt=""
-              className="emptycart_img"
-              style={{ width: "5rem", padding: 10 }}
-            />
-          </div>
+          <div></div>
         )}
       </Container>
     </div>

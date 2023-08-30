@@ -5,14 +5,14 @@ import BoldSecondWord from "./BoldSecond";
 
 const Container = styled.div`
   width: 100%;
-  height: 500px;
+  height: 85vh;
   display: block;
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
 
   background: rgba(76, 175, 80, 0);
-  font-family: "Poppins";
+  font-family: "Lexend";
   font-style: normal;
   font-weight: 700;
   color: #ffffff;
@@ -50,7 +50,7 @@ const SlideB = styled.div`
   height: 300vh;
   display: flex;
 
-  background: #fff8eb;
+  background: #f1faff;
 
   display: flex;
   flex-direction: column;
@@ -67,9 +67,15 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #${(props) => props.bg};
+  /* background-color: #${(props) => props.bg}; */
   /* background:url(${(props) => props.img}) ; */
   /* background: inherit; */
+`;
+
+const Image = styled.img`
+  background-color: #c50000;
+  width: 100%;
+  height: 100%;
 `;
 
 const ContBoxCont = styled.p`
@@ -84,8 +90,9 @@ const ContBoxCont = styled.p`
 `;
 
 const Button = styled.div`
-  background-color: #00337c;
-  color: #ffffff;
+  background: #ffbf00;
+
+  color: #333333;
   width: 35%;
   padding: 1.5vh;
   font-family: Lexend;
@@ -101,6 +108,9 @@ const SlideContBox = styled.div`
   padding-bottom: 15%;
   padding-left: 10%;
   padding-right: 11%;
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
 `;
 
 const Indicators = styled.div`
@@ -143,8 +153,8 @@ const SellerTwo = ({ Items, interval = 5000 }) => {
       <WrapperTwo>
         <WrapperA slideIndex={slideIndex}>
           {Items.map((item) => (
-            <Slide bg={item.bg} key={item.id}>
-              <h2>{item.title}</h2>
+            <Slide key={item.id}>
+              <Image src={item.img} />
             </Slide>
           ))}
         </WrapperA>

@@ -15,7 +15,7 @@ const Names = styled.a`
   text-decoration: none;
   font-family: Lexend;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 32px;
   letter-spacing: 0.15000000596046448px;
   padding-left: 4vh;

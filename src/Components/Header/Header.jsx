@@ -47,9 +47,10 @@ const HeaderBar = styled.div`
   background: rgb(255, 255, 255, ${(props) => props.bg});
   position: static;
   /* border-bottom: ${(props) => props.bor} solid #4f4f4f; */
-
+  box-shadow: rgba(0, 0, 0, ${(props) => props.bor}) 0px 1px 4px;
   width: 100vw;
   padding-right: 1.5vh;
+  padding-left: 1.5vh;
   padding-top: 1vh;
   padding-bottom: 1vh;
 
@@ -68,11 +69,10 @@ const HeaderBar = styled.div`
 
 const MenuCont = styled.div`
   color: ${(props) => props.col};
+  padding-right: 3vh;
 `;
 
 const SignCont = styled.div`
-  margin-left: auto;
-  margin-right: 0;
   display: flex;
   align-items: center;
   text-align: center;
@@ -104,15 +104,16 @@ const Dropbtn = styled.div`
 const Dropdowncontent = styled.div`
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   min-width: 65vh;
   max-height: 80vh;
   overflow-y: scroll;
+  border-radius: 8px;
 
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   &:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
   }
 `;
 
@@ -150,8 +151,9 @@ const Dropdownontenta = styled.div`
 `;
 
 const Title = styled.div`
-  padding-left: 1vh;
-  display: block;
+  display: flex;
+  vertical-align: middle;
+  padding-right: 3vh;
   text-align: left;
   color: ${(props) => props.col};
 `;
@@ -163,6 +165,7 @@ const TitHead = styled.div`
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.48px;
+  margin-top: 5px;
 `;
 
 const OrDisp = styled.div`
@@ -217,7 +220,7 @@ function Header() {
   const [SearchColor, setSearchColor] = useState("#000000");
   const [SearchBgColor, setSearchBgColor] = useState("#ffffff");
   const [SearchBorColor, setSearchBorColor] = useState("#ffffff");
-  const [BorderBottom, setBorderBottom] = useState("0px");
+  const [BorderBottom, setBorderBottom] = useState(0);
   const [ArcCol, setArcCol] = useState("#ffffff");
   // const [authStatus, setAuthStatus] = useState(false);
 
@@ -242,10 +245,10 @@ function Header() {
       setSearchBgColor("#F2F2F2");
       setSearchBorColor("#E0E0E0");
       setSearchColor("#4F4F4F");
-      setBorderBottom("2px");
+      setBorderBottom(0.24);
       setBlue("#00337C");
       setYellow("#FFAF19");
-      setArcCol("#F0F0F0");
+      setArcCol("#828282");
     } else {
       setMenuColor("#ffffff");
       setSearchBgColor("#ffffff");
@@ -325,11 +328,10 @@ function Header() {
     <HeaderBar bg={backgroundColor} bor={BorderBottom}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Logo />
-
           <StyledLink to="/">
             <Title col={MenuColor}>
-              <TitHead>Renvisa </TitHead>
+              <Logo />
+              <TitHead>Renvisa</TitHead>
             </Title>
           </StyledLink>
 
@@ -429,7 +431,7 @@ function Header() {
               >
                 {authStatus ? (
                   <>
-                    <MenuItem>
+                    <MenuItem component={Link} to="/orders">
                       <ListItemIcon>
                         <LocalMall />
                       </ListItemIcon>{" "}

@@ -6,12 +6,24 @@ import {
   WorkspacePremium,
 } from "@mui/icons-material";
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ReactComponent as QualIcon } from "../../Assets/Home/WhyUs/Quality.svg";
 import { ReactComponent as ReplaceIcon } from "../../Assets/Home/WhyUs/Replacement.svg";
 import { ReactComponent as ShippingIcon } from "../../Assets/Home/WhyUs/Shipping.svg";
 import { ReactComponent as SupportIcon } from "../../Assets/Home/WhyUs/Support.svg";
 import { Icon } from "@mui/material";
+
+// Define the keyframes animation
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   font-family: Lexend;
@@ -54,11 +66,12 @@ const CardInfo = styled.div`
   opacity: 0;
   flex: 0;
   overflow: hidden;
-  border-left: 4px;
+  border-left: 3px;
   border-left-color: grey;
   border-left-style: dashed;
   padding: 1vh;
   padding-left: 2vh;
+  cursor: pointer;
 `;
 
 const IconCon = styled.div`
@@ -67,21 +80,20 @@ const IconCon = styled.div`
 `;
 
 const CardTit = styled.div`
+  color: #4f4f4f;
+  text-align: center;
   font-family: Lexend;
   font-size: 18px;
+  font-style: normal;
   font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: center;
-  margin-left: 20%;
+  line-height: 20px; /* 177.778% */
+  /* margin-top: 6vh; */
+  margin-left: auto;
   margin-right: auto;
-  margin-top: 15%;
 `;
 
 const SVGSize = styled.div`
-  transform: scale(0.5);
-  width: 50%;
-  height: 50%;
+  transform: scale(0.8);
   margin-left: auto;
   margin-right: auto;
 `;
@@ -89,7 +101,8 @@ const SVGSize = styled.div`
 const Card = styled.div`
   color: #4f4f4f;
   transition: 0.5s;
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   align-content: center;
   font-size: 2vh;
@@ -112,10 +125,11 @@ const Card = styled.div`
     opacity: 1;
 } */
 `;
+
 const CardCont = styled.div`
   background-color: #fafdff;
   display: flex;
-  width: 18%;
+  width: 20%;
   height: 30vh;
   margin: 2vh;
   margin-bottom: 3vh;
@@ -138,6 +152,8 @@ const CardCont = styled.div`
     opacity: 1;
     flex: 3;
     color: #4f4f4f;
+    animation-delay: 0.5s;
+    animation: ${fadeIn} 1s ease-in-out forwards; /* Apply the animation */
   }
 
   &:hover ${Card} {
@@ -148,7 +164,15 @@ const CardCont = styled.div`
   }
 
   &:hover ${CardTit} {
-    margin-left: 10%;
+    /* margin-left: 10%; */
+    margin-top: -8px;
+    transition: margin-top 1s;
+  }
+
+  &:hover ${SVGSize} {
+    /* margin-left: 10%; */
+    transform: scale(0.7);
+    transition: transform 1s;
   }
 `;
 

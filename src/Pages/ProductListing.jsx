@@ -32,7 +32,7 @@ const Containerwhole = styled.div`
   display: flex;
   height: 150vh;
   width: 100%;
-  padding-top: 15vh;
+  padding-top: 13vh;
 `;
 
 const FilterWrap = styled.div`
@@ -47,7 +47,6 @@ const FilterWrap = styled.div`
 
 const HeadCon = styled.div`
   position: sticky;
-  width: 100vw;
   z-index: 100;
 `;
 
@@ -86,13 +85,40 @@ const FilterHead = styled.div`
   text-transform: uppercase;
   padding-top: 3vh;
   padding-bottom: 2vh;
-  border-top: 1px solid #e0e0e0;
+  display: flex;
+  gap: 2vh;
+
   margin-top: 2vh;
 `;
 
 const FilterBoxBrand = styled.div`
-  height: 50vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  margin-bottom: 2vh;
+  max-height: 40vh;
+
+  .other-component {
+    font-family: Lexend;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #4f4f4f;
+    max-height: calc(30px * 5);
+    overflow: hidden;
+  }
+
+  &.clicked {
+    max-height: calc(30px * 7);
+
+    .other-component {
+      max-height: calc(30px * 7);
+    }
+  }
 `;
 
 const FilterCont = styled.label`
@@ -103,6 +129,9 @@ const FilterCont = styled.label`
   letter-spacing: 0em;
   text-align: left;
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const WrapperTit = styled.div`
@@ -125,7 +154,7 @@ const WrapperNum = styled.div`
 
 const Sort = styled.div`
   margin-left: auto;
-  margin-right: 5%;
+  margin-right: 0%;
   display: flex;
   margin-top: auto;
   margin-bottom: 0;
@@ -144,6 +173,30 @@ const WrapperFlex = styled.div`
   width: 100%;
   display: flex;
   vertical-align: middle;
+  padding-bottom: 1vh;
+`;
+
+const FilterPriceWrap = styled.div`
+  font-family: Lexend;
+  font-size: 6px;
+  font-weight: 200;
+`;
+
+const ViewMoreOffers = styled.div`
+  font-family: Lexend;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: right;
+  border-bottom: 1px solid #e0e0e0;
+  margin-right: 0;
+  margin-left: auto;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 const iOSBoxShadow =
@@ -154,13 +207,21 @@ const IOSSlider = sty(Slider)(({ theme }) => ({
   height: 2,
   width: "80%",
   margin: "15px",
+  fontFamily: "Lexend",
+  fontSize: "12px",
   padding: "15px 0",
   "& .MuiSlider-thumb": {
-    height: 28,
-    width: 28,
+    fontFamily: "Lexend",
+    fontSize: 12,
+    fontWeight: "200",
+    height: 24,
+    width: 24,
     backgroundColor: "#FFBF00",
     boxShadow: iOSBoxShadow,
     "&:focus, &:hover, &.Mui-active": {
+      fontFamily: "Lexend",
+      fontSize: 12,
+      fontWeight: "200",
       boxShadow:
         "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
       // Reset on touch devices, it doesn't add specificity
@@ -170,31 +231,50 @@ const IOSSlider = sty(Slider)(({ theme }) => ({
     },
   },
   "& .MuiSlider-valueLabel": {
+    fontFamily: "Lexend",
     fontSize: 12,
-    fontWeight: "normal",
+    fontWeight: "200",
     top: -6,
     backgroundColor: "unset",
     color: theme.palette.text.primary,
     "&:before": {
+      fontFamily: "Lexend",
+      fontSize: "12px",
+      fontWeight: "200",
       display: "none",
     },
     "& *": {
+      fontFamily: "Lexend",
+      fontSize: 12,
+      fontWeight: "200",
       background: "transparent",
       color: theme.palette.mode === "dark" ? "#fff" : "#000",
     },
   },
   "& .MuiSlider-track": {
+    fontFamily: "Lexend",
+    fontSize: 12,
+    fontWeight: "200",
     border: "none",
   },
   "& .MuiSlider-rail": {
+    fontFamily: "Lexend",
+    fontSize: 12,
+    fontWeight: "200",
     opacity: 0.5,
     backgroundColor: "#1e00ff",
   },
   "& .MuiSlider-mark": {
+    fontFamily: "Lexend",
+    fontSize: "12px",
+    fontWeight: "800",
     backgroundColor: "#bfbfbf",
     height: 8,
     width: 1,
     "&.MuiSlider-markActive": {
+      fontFamily: "Lexend",
+      fontSize: "12px",
+      fontWeight: "200",
       opacity: 1,
       backgroundColor: "currentColor",
     },
@@ -226,10 +306,32 @@ const marks = [
 
 const ProductListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProductsOne, setFilteredProductsOne] = useState([]);
+  // const [filteredProductsOne, setFilteredProductsOne] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
+  const [seeMore, setSeeMore] = useState("View Less");
+  const [isClicked2, setIsClicked2] = useState(false);
+  const [seeMore2, setSeeMore2] = useState("View Less");
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    if (seeMore === "See More") {
+      setSeeMore("View Less");
+    } else {
+      setSeeMore("See More");
+    }
+  };
+
+  const handleClick2 = () => {
+    setIsClicked2(!isClicked2);
+    if (seeMore2 === "See More") {
+      setSeeMore2("View Less");
+    } else {
+      setSeeMore2("See More");
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -247,14 +349,6 @@ const ProductListing = () => {
     fetchData();
   }, []);
 
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Error: {error.message}</p>;
-  // }
-
   useEffect(() => {
     console.log(data);
   }, [data]);
@@ -267,17 +361,53 @@ const ProductListing = () => {
     const queryParams = new URLSearchParams(location.search);
     const search = queryParams.get("search") || "";
     setSearchQuery(search);
-    filterProducts(search);
+    // filterProducts(search);
   }, [location.search]);
 
-  const filterProducts = (searchQuery) => {
-    const filtered = Products5.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase())
+  const searchKeywords = searchQuery.toLowerCase().split(" ");
+  const filteredProductsOne = Products5.filter((product) => {
+    const subcategories = [
+      product.name,
+      product.category,
+      product.brand,
+      product.industry,
+      product.application,
+      product.sub_category,
+      // product.SubCategory4,
+      // product.SubCategory5,
+      // product.SubCategory6,
+    ];
+
+    return searchKeywords.every((keyword) =>
+      subcategories.some((subcategory) =>
+        subcategory.toLowerCase().includes(keyword)
+      )
     );
-    setFilteredProductsOne(filtered);
-  };
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  function handleCategoryCheckboxChange(event) {
+    const category = event.target.value;
+    if (event.target.checked) {
+      setSelectedCategory([...selectedCategory, category]);
+    } else {
+      setSelectedCategory(
+        selectedCategory.filter(
+          (selectedCategory) => selectedCategory !== category
+        )
+      );
+    }
+  }
+
+  // const filterProducts = (searchQuery) => {
+  //   const filtered = Products5.filter(
+  //     (product) =>
+  //       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       product.brand.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  //   setFilteredProductsOne(filtered);
+  // };
 
   //Brand Filtering//
 
@@ -301,21 +431,28 @@ const ProductListing = () => {
   };
 
   const allBrands = Array.from(
-    new Set(Products5.map((product) => product.brand))
+    new Set(filteredProductsOne.map((product) => product.brand))
   );
+
+  const allcat = Array.from(
+    new Set(filteredProductsOne.map((product) => product.category))
+  );
+
+  console.log(allcat);
 
   const filteredProducts = filteredProductsOne.filter((product) => {
     if (
-      selectedBrands.length === 0 &&
-      product.price >= priceFilter[0] &&
-      product.price <= priceFilter[1]
+      (selectedBrands.length === 0 || selectedCategory.length === 0) &&
+      product.discounted_price >= priceFilter[0] &&
+      product.discounted_price <= priceFilter[1]
     ) {
       return true;
     } else {
       return (
-        selectedBrands.includes(product.brand) &&
-        product.price >= priceFilter[0] &&
-        product.price <= priceFilter[1]
+        (selectedBrands.includes(product.brand) ||
+          selectedBrands.includes(product.category)) &&
+        product.discounted_price >= priceFilter[0] &&
+        product.discounted_price <= priceFilter[1]
       );
     }
   });
@@ -334,6 +471,14 @@ const ProductListing = () => {
     return `₹${value}`;
   }
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
   return (
     <Container>
       <HeadCon>
@@ -342,11 +487,34 @@ const ProductListing = () => {
 
       <Containerwhole>
         <FilterWrap>
+          <FilterHead> Category </FilterHead>
+
+          <FilterBoxBrand className={isClicked2 ? "clicked" : ""}>
+            {allcat.map((category) => (
+              <div className="other-component" key={category}>
+                <Checkbox
+                  type="checkbox"
+                  value={category}
+                  checked={selectedCategory.includes(category)}
+                  onChange={(event) => handleCategoryCheckboxChange(event)}
+                  sx={{
+                    color: "#E0E0E0",
+                    "&.Mui-checked": {
+                      color: "#F5A91D",
+                    },
+                  }}
+                />
+                {category}
+              </div>
+            ))}
+          </FilterBoxBrand>
+          <ViewMoreOffers onClick={handleClick2}>{seeMore2}</ViewMoreOffers>
+
           <FilterHead> Brand </FilterHead>
 
-          <FilterBoxBrand>
+          <FilterBoxBrand className={isClicked ? "clicked" : ""}>
             {allBrands.map((brand) => (
-              <FilterCont key={brand}>
+              <div className="other-component" key={brand}>
                 <Checkbox
                   type="checkbox"
                   value={brand}
@@ -360,23 +528,30 @@ const ProductListing = () => {
                   }}
                 />
                 {brand}
-              </FilterCont>
+              </div>
             ))}
           </FilterBoxBrand>
+          <ViewMoreOffers onClick={handleClick}>{seeMore}</ViewMoreOffers>
 
-          <div>
-            <FilterHead> Price </FilterHead>
+          <FilterPriceWrap>
+            <FilterHead>
+              {" "}
+              Price{" "}
+              <h6>
+                (Rs.{priceFilter[0]} - Rs.{priceFilter[1]})
+              </h6>
+            </FilterHead>
             <IOSSlider
               id="price-filter"
               value={priceFilter}
               getAriaValueText={valuetext}
               onChange={handlePriceChange}
-              marks={marks}
               min={0}
+              valueLabelDisplay="auto"
               max={60000}
               step={5000}
             />
-          </div>
+          </FilterPriceWrap>
 
           {/* <button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
           Sort by Price ({sortOrder === 'asc' ? 'Low to High' : 'High to Low'})
@@ -385,27 +560,38 @@ const ProductListing = () => {
 
         <WrapperWhole>
           <WrapperHead>
-            <BreadcrumbsPlp PLPText={searchQuery} />
-            <WrapperTit>{searchQuery}</WrapperTit>
             <WrapperFlex>
-              <WrapperNum>‘{count}’ Results</WrapperNum>
+              <div>
+                <BreadcrumbsPlp PLPText={searchQuery} />
+                <WrapperTit>{searchQuery}</WrapperTit>
+                <WrapperNum>‘{count}’ Results</WrapperNum>
+              </div>
 
               <Sort>
                 <SortText>Sort by:</SortText>
 
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <FormControl
+                  sx={{ m: 1, minWidth: 120, fontFamily: "Lexend" }}
+                  size="small"
+                >
                   <Select
                     id="demo-simple-select"
                     value={sortOrder}
                     displayEmpty
+                    sx={{ fontFamily: "Lexend", fontSize: "14px" }}
                   >
                     <MenuItem
                       onClick={() => setSortOrder("desc")}
                       value={"desc"}
+                      sx={{ fontFamily: "Lexend", fontSize: "14px" }}
                     >
                       High to Low
                     </MenuItem>
-                    <MenuItem onClick={() => setSortOrder("asc")} value={"asc"}>
+                    <MenuItem
+                      sx={{ fontFamily: "Lexend", fontSize: "14px" }}
+                      onClick={() => setSortOrder("asc")}
+                      value={"asc"}
+                    >
                       Low to High
                     </MenuItem>
                   </Select>

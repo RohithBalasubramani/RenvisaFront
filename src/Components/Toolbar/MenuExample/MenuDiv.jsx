@@ -124,7 +124,7 @@ function MenuDiv({ colo, arccol }) {
       <MenuItemTwo
         cat={brands}
         sub={products}
-        head="Section 4 "
+        head="Categories "
         col={colo}
         arccol={arccol}
         toggleSubMenu={toggleSubMenu4}
@@ -133,11 +133,9 @@ function MenuDiv({ colo, arccol }) {
       <MenuItemTwo
         cat={brands}
         sub={products}
-        head="Section 5 "
+        head="Seller "
         col={colo}
         arccol={arccol}
-        toggleSubMenu={toggleSubMenu5}
-        isSubMenuOpen={isSubMenuOpen5}
       />
     </Container>
   );

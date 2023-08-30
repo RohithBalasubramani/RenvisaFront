@@ -1,6 +1,6 @@
 import { Breadcrumbs } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StyledLink from "../StyLink";
 
@@ -38,15 +38,29 @@ const CrumbsTwo = styled.div`
 `;
 
 const NavBreadcrumbs = ({ item }) => {
+  const navigate = useNavigate();
+
+  const handleSearchButtonClick = ({ search }) => {
+    navigate(`/product?search=${search}`);
+  };
+
   const breadcrumbs = [
     <Crumbs key="1" color="inherit">
       <StyledLink to={"/"}>Home</StyledLink>
     </Crumbs>,
-    <Crumbs key="2" color="inherit" to="/">
-      Solar
+    <Crumbs
+      onClick={() => handleSearchButtonClick({ search: item.category })}
+      key="2"
+      color="inherit"
+    >
+      {item.category}
     </Crumbs>,
-    <Crumbs key="3" color="text.primary">
-      Solar Panel
+    <Crumbs
+      onClick={() => handleSearchButtonClick({ search: item.sub_category })}
+      key="3"
+      color="text.primary"
+    >
+      {item.sub_category}
     </Crumbs>,
     <CrumbsTwo key="3" color="text.primary">
       {item.name}
