@@ -101,13 +101,10 @@ const Acti = styled.div`
 const DiscImg = styled.div`
   z-index: 5;
   position: absolute;
-  background-size: contain;
-  background-size: 100vw 100vh;
-  padding: 0.9vh;
-  padding-right: 3.25vh;
+
   top: 0%;
   left: 0%;
-  background: url(${Disctag});
+
   font-family: Lexend;
   font-size: 12px;
   font-weight: 400;
@@ -115,7 +112,11 @@ const DiscImg = styled.div`
   letter-spacing: 0.02em;
   text-align: left;
   color: #00337c;
+  display: flex;
+  margin: auto;
 `;
+
+const DiscImg2 = styled.img``;
 
 const Gallery = ({ items }) => {
   const [currentImage, setCurrentImage] = useState(items.image);
@@ -172,10 +173,13 @@ const Gallery = ({ items }) => {
       <GalImgdiv>
         <GalImg src={currentImage} alt="product-1" onClick={handleToggle} />
         <DiscImg>
-          {Math.round(
-            ((items.price - items.discounted_price) * 100) / items.price
-          )}
-          % off
+          <DiscImg2 src={Disctag} />
+          <DiscImg>
+            {Math.round(
+              ((items.price - items.discounted_price) * 100) / items.price
+            )}
+            % off
+          </DiscImg>
         </DiscImg>
       </GalImgdiv>
     </GalleryCon>

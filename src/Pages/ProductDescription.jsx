@@ -646,7 +646,7 @@ const ProductDescription = ({ products }) => {
             </SecLeft>
 
             <SecRight>
-              <Refnum>Ref no: {product.HSN_code}</Refnum>
+              <Refnum>HSN Code: {product.HSN_code}</Refnum>
               <Title>{product.name}</Title>
               <Brand>{product.brand}</Brand>
               <ReviewDiv>
@@ -665,12 +665,7 @@ const ProductDescription = ({ products }) => {
               </ActualPrice>
 
               <ActualPriceSmall>
-                + {product.discounted_price * 0.18} (
-                {Math.round(
-                  ((product.price - product.discounted_price) * 100) /
-                    product.price
-                )}
-                % GST)
+                + ₹{Math.round(product.discounted_price * 0.18)} (18% GST)
               </ActualPriceSmall>
 
               <OffersDiv>

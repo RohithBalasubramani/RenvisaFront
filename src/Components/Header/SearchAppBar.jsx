@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import { Products5 } from "../../data";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../Redux/actions/action";
+import axios from "axios";
 
 const Cont = styled("div")`
   background-color: ${(props) => props.bg};
@@ -23,8 +24,8 @@ const Wrapper = styled("div")`
   background-color: ${(props) => props.bg};
   border-radius: 8px;
 
-  height: 50vh;
-  width: 40%;
+  max-height: 50vh;
+  width: 39%;
   padding: 2vh;
   position: absolute;
   top: 9vh;
@@ -44,6 +45,10 @@ const List = styled("div")`
   text-overflow: ellipsis; /* enables ellipsis */
   white-space: nowrap; /* keeps the text in a single line */
   overflow: hidden;
+  &:hover {
+    cursor: pointer;
+    background-color: #ececec;
+  }
 `;
 
 const StyLink = styled("a")`
@@ -102,12 +107,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar({ SearchBgCol, SearchCol, SearchBorCol }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSubMenuOpen1, setIsSubMenuOpen1] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // const dispatch = useDispatch();
-  // const { loading, data, error } = useSelector((state) => state.data);
-  // useEffect(() => {
-  //   dispatch(fetchData());
-  // }, [dispatch]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("https://renvisa.org/product/");
+        console.log(response.data);
+        setData(response.data);
+        console.log("datatest", data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -129,45 +148,57 @@ export default function SearchAppBar({ SearchBgCol, SearchCol, SearchBorCol }) {
     }
   }, [searchQuery]);
 
-  const filteredProducts = Products5.filter((product) =>
-    product.rname.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-  return (
-    <>
-      <Cont bg={SearchBgCol} bor={SearchBorCol} col={SearchCol}>
-        <div>
-          <StyledInputBase
-            placeholder="Search Products, Brands, ..."
-            inputProps={{ "aria-label": "search" }}
-            onChange={handleSearchInputChange}
-            value={searchQuery}
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                handleSearchButtonClick();
-              }
-            }}
-          />
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
-          <IconButton
-            onClick={handleSearchButtonClick}
-            sx={{ color: { SearchCol } }}
-          >
-            <SearchIcon />
-          </IconButton>
-        </div>
-        {isSubMenuOpen1 && (
-          <Wrapper bg={SearchBgCol}>
-            {filteredProducts.map((product) => (
-              <div>
-                <StyLink href={`/products/${product.id}`}>
-                  <List key={product.id}>{product.rname}</List>
-                </StyLink>
-              </div>
-            ))}
-          </Wrapper>
-        )}
-      </Cont>
-    </>
-  );
+  if (data) {
+    const filteredProducts = data.filter(
+      (product) =>
+        product.name &&
+        searchQuery &&
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    return (
+      <>
+        <Cont bg={SearchBgCol} bor={SearchBorCol} col={SearchCol}>
+          <div>
+            <StyledInputBase
+              placeholder="Search Products, Brands, ..."
+              inputProps={{ "aria-label": "search" }}
+              onChange={handleSearchInputChange}
+              value={searchQuery}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleSearchButtonClick();
+                }
+              }}
+            />
+
+            <IconButton
+              onClick={handleSearchButtonClick}
+              sx={{ color: { SearchCol } }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </div>
+          {isSubMenuOpen1 && (
+            <Wrapper bg={SearchBgCol}>
+              {filteredProducts.map((product) => (
+                <div>
+                  <StyLink href={`/products/${product.id}`}>
+                    <List key={product.id}>{product.name}</List>
+                  </StyLink>
+                </div>
+              ))}
+            </Wrapper>
+          )}
+        </Cont>
+      </>
+    );
+  }
 }
