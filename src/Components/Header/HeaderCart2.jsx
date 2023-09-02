@@ -20,21 +20,13 @@ import { ReactComponent as DeleteIcon } from "../../Assets/DeleteIcon.svg";
 
 const Container = styled.div`
   margin: 3px;
-  height: 50vh;
-  width: 50vw;
-  background-color: #ffffff;
+  height: auto;
+  width: 90%;
 `;
 const Quant = styled.div`
   display: inline;
   outline-color: black;
 `;
-
-const SVGSize = styled.div`
-  transform: scale(0.5);
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 const ValueButtonDecrease = styled.button`
   display: inline-block;
   border: 1px solid #ddd;
@@ -142,8 +134,8 @@ const ProdPrice = styled.div`
 const EmptyCart = styled.div`
   display: flex;
   flex-direction: column;
-  height: 50vh;
-  width: 50vw;
+  width: 100%;
+  height: 70vh;
 `;
 
 const CartItems = styled.div`
@@ -151,13 +143,13 @@ const CartItems = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 4vh;
 `;
 
 const EmptyText = styled.div`
   color: #011f46;
   font-family: Lexend;
-  font-size: 24px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -197,8 +189,8 @@ const QuantBox = styled.div`
 `;
 
 const ImageCont = styled.div`
-  height: 20vh;
-  width: 10vw;
+  height: 40vh;
+  width: 20vw;
   padding-top: 4.5vh;
   padding-left: 3vw;
   border: 1px solid #e0e0e0;
@@ -319,7 +311,7 @@ const HeaderCart = () => {
                         Quantity{" "}
                         <Remove
                           onClick={
-                            row.qnty <= 1 ? () => dlt(row._id) : () => rmv(row)
+                            row.qnty <= 1 ? () => dlt(row.id) : () => rmv(row)
                           }
                         />{" "}
                         <QuantBox>{row.qnty}</QuantBox>{" "}
@@ -373,9 +365,9 @@ const HeaderCart = () => {
         ) : (
           <EmptyCart>
             <CartItems>
-              <SVGSize>
-                <CartEmpty />
-              </SVGSize>
+              {/* <SVGSize> */}
+              <CartEmpty />
+              {/* </SVGSize> */}
               <EmptyText>The Cart is Empty</EmptyText>
             </CartItems>
           </EmptyCart>

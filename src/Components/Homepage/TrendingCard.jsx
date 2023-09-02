@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import SolCat from "../../Assets/SolCat.png";
 import { CatSub, Cate } from "../../data";
+import { Link, useNavigate } from "react-router-dom";
+import StyledLink from "../StyLink";
 
 const OverContainer = styled.div`
   height: 100%;
@@ -137,17 +139,21 @@ const Icons = styled.ul`
 `;
 
 const TrendingCard = () => {
+  const navigate = useNavigate();
+
   return (
     <OverContainer>
       <Wrapper>
         <GridDiv>
           {Cate.map((item) => (
-            <CardCont>
-              <Card>
-                <Image src={item.img} />
-              </Card>
-              <Text>{item.Cat}</Text>
-            </CardCont>
+            <StyledLink to={`/product?search=${item.Cat}`}>
+              <CardCont>
+                <Card>
+                  <Image src={item.img} />
+                </Card>
+                <Text>{item.Cat}</Text>
+              </CardCont>
+            </StyledLink>
           ))}
         </GridDiv>
       </Wrapper>

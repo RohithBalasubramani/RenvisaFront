@@ -56,14 +56,14 @@ export const sliderItems = [
   {
     id: 2,
     img: im2,
-    title: "Armoured Cable",
+    title: "Lugs and Glands",
     desc: "Get Solar trackers and more! GET 45% OFF ON SOLAR SECTOR.",
     bg: "09a022",
   },
   {
     id: 3,
     img: im3,
-    title: "Cable and Ties",
+    title: "SCB Fuse",
     desc: "Raspberry Pi and Arduino Modules! GET UPTO 60% OFF ON BULK ORDERS.",
     bg: "860707",
   },

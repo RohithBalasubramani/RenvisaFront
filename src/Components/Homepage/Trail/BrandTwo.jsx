@@ -72,7 +72,7 @@ const BrandTwo = () => {
   return (
     <ContainerWhole>
       <BrandHead>
-        <Center>Choose from 10+ Brands</Center>
+        <Center>Choose from 100+ Brands</Center>
       </BrandHead>
 
       <Container>

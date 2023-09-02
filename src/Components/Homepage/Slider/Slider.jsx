@@ -10,6 +10,7 @@ import { mobile } from "../../../responsive";
 import solcat from "../../../Assets/SolCat.png";
 import { useEffect } from "react";
 import Header from "../../Header/Header";
+import StyledLink from "../../StyLink";
 
 const Container = styled.div`
   width: 100%;
@@ -265,6 +266,14 @@ const ButtonCustomOne = styled.div`
   letter-spacing: 0;
   margin-bottom: auto;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s ease-out,
+    box-shadow 0.2s ease-out; /* Add transition properties */
+
+  /* Add hover styles */
+  &:hover {
+    transform: scale(1.02); /* Add a slight scale-up animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  }
 `;
 
 const ButtonCustomTwo = styled.div`
@@ -280,6 +289,13 @@ const ButtonCustomTwo = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+
+  /* Hover styles */
+  &:hover {
+    transform: scale(1.02); /* Add a slight scale-up animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  }
 `;
 
 const Slider = ({ Items }) => {
@@ -323,8 +339,12 @@ const Slider = ({ Items }) => {
                   </Desc>
 
                   <ButtonCont>
-                    <ButtonCustomOne>Explore</ButtonCustomOne>
-                    <ButtonCustomTwo>Join as a seller</ButtonCustomTwo>
+                    <StyledLink to={`/product?search=${item.title}`}>
+                      <ButtonCustomOne>Explore</ButtonCustomOne>
+                    </StyledLink>
+                    <StyledLink to="sellersaccount">
+                      <ButtonCustomTwo>Join as a seller</ButtonCustomTwo>
+                    </StyledLink>
                   </ButtonCont>
                 </Center>
               </InfoContainer>

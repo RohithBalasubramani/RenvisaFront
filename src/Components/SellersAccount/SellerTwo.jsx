@@ -209,7 +209,7 @@ const Sellers = () => {
             />
             <CustomTextFeild
               placeholder="Enter Last Name"
-              sx={{ width: "38%", marginLeft: "2%" }}
+              sx={{ width: "38%" }}
             />
           </div>
           <PassCont>

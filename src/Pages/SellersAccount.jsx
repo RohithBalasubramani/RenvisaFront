@@ -1,273 +1,191 @@
-import { AddCircle, DownloadDone, LocalShipping, Login, Payment, ReceiptLong, RequestQuote } from '@mui/icons-material'
-import { Avatar, Button, Checkbox, Divider, ListItemText, MenuItem, OutlinedInput, Paper, Select, TextField } from '@mui/material'
-import React from 'react'
-import styled from 'styled-components'
-import CustomizedAccordions from '../Components/Bulkquery/Accordion'
-import Sellers from '../Components/SellersAccount/Sellers'
-  
- 
- 
+import {
+  AddCircle,
+  DownloadDone,
+  LocalShipping,
+  Login,
+  Payment,
+  ReceiptLong,
+  RequestQuote,
+} from "@mui/icons-material";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Divider,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Paper,
+  Select,
+  TextField,
+} from "@mui/material";
+import React from "react";
+import styled from "styled-components";
+import CustomizedAccordions from "../Components/Bulkquery/Accordion";
+import Sellers from "../Components/SellersAccount/Sellers";
+import SliderBack from "../Assets/Slider/Slider.png";
+import Logo from "../Components/Header/Logo";
+import LogoWhite from "../Components/Header/LogoWhite";
+import HeaderTwo from "../Components/Header/HeaderTwo";
+
 const Container = styled.div`
-background: #FFFFFF;
-height: 260vh;
-width: 100%;
-display: block;
-position: relative;
-font-family: 'Poppins';
-font-style: normal;
-
-`
-
+  background-image: url(${SliderBack});
+  background-size: 100vw 180vh;
+  height: 180vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+  font-family: "Lexend";
+  font-style: normal;
+  padding-top: 10vh;
+`;
 
 const Title = styled.div`
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-/* or 72px */
-margin: 3vh;
-margin-left: 5vh;
-margin-bottom: 6.5vh;
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  flex: 1;
+  padding: 5vh;
+`;
 
-display: block;
-align-items: center;
-letter-spacing: 0.05em;
-text-transform: uppercase;
-
-color: #000000;
-`
+const SVGSize = styled.div`
+  transform: scale(1.3);
+`;
 
 const TitSpan = styled.div`
-font-weight: 400;
-font-size: 32px;
-/* or 58px */
-margin-top:0;
-
-display: flex;
-align-items: center;
-letter-spacing: 0.05em;
-color: #000000;
-`
+  color: var(--Gray-6, #f2f2f2);
+  font-family: Lexend;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.7px;
+  width: 80%;
+  margin-top: 2vh;
+`;
 
 const TitAccent = styled.div`
-font-weight: 700;
-color: #FF9471;
-`
+  font-weight: 700;
+  color: #ff9471;
+`;
 const Midcon = styled.div`
-background: #09193D;
-border-radius: 100px 0px 0px 100px;
-width: 100%;
-height: 140vh;
-position: relative;
-`
+  position: relative;
+  flex: 1;
+`;
 
 const FaqBox = styled.div`
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 180.5%;
+  padding: 3vh;
+  /* identical to box height, or 65px */
+  margin-top: 6vh;
+  margin-bottom: 2vh;
 
-font-weight: 600;
-font-size: 36px;
-line-height: 180.5%;
-padding: 3vh;
-/* identical to box height, or 65px */
-margin-top: 6vh;
-margin-bottom: 2vh;
+  align-items: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 
-align-items: center;
-letter-spacing: 0.05em;
-text-transform: uppercase;
-
-color: #000000;
-`
+  color: #000000;
+`;
 
 const SellersCont = styled.div`
-z-index: 4;
-width: 40%;
-position: absolute;
-right: 7vh;
-top: -25vh;
-`
+  width: 100%;
+  padding: 10vh;
+`;
 
 const Instruc = styled.div`
-display: inline-flex;
-align-items: center;
-
-`
+  display: inline-flex;
+  align-items: center;
+`;
 const InsDis = styled.div`
-display: block;
-font-weight: 700;
-font-size: 35px;
-line-height: 180.5%;
-/* or 63px */
+  display: block;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 180.5%;
+  /* or 63px */
 
-align-items: center;
-letter-spacing: 0.05em;
-text-transform: capitalize;
+  align-items: center;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
 
-color: #FFFFFF;
-`
+  color: #ffffff;
+`;
 
 const InsDisSpan = styled.div`
-font-weight: 500;
-font-size: 14px;
-line-height: 180.5%;
-/* or 25px */
-display: flex;
-align-items: center;
-letter-spacing: 0.05em;
-color: #FFFFFF;
-`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 180.5%;
+  /* or 25px */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+`;
 
 const InsCont = styled.div`
-display: block;
-`
+  display: block;
+`;
 
 const Instot = styled.div`
-padding: 10vh;
-padding-left: 10vh;
-`
+  padding: 10vh;
+  padding-left: 10vh;
+`;
 
 const VertiLine = styled.div`
-color: white ;
-border-left:3px solid white;
-height: 10vh;
-margin-left: 5vh;
-`
+  color: white;
+  border-left: 3px solid white;
+  height: 10vh;
+  margin-left: 5vh;
+`;
 
-const FaqTit = styled.div`
-text-align: center;
-align-content: center;
-`
+const TitFlex = styled.div`
+  display: flex;
+  gap: 1.5vh;
+`;
 
-
-
-const DispLeft = styled.div`
-flex: 2;
-height: 100%;
-display: relative;
-
-`
-
-
-
-
-
+const HeadCon = styled.div`
+  position: sticky;
+  width: 100vw;
+  z-index: 100;
+`;
 
 const SellersAccount = () => {
-
-  
-
   return (
-    <Container>
-      <Title>
-        Sell on Renvisa
-      <TitSpan> In&nbsp; <TitAccent>4&nbsp;</TitAccent> simple steps</TitSpan>
-      </Title>
+    <div>
+      <HeadCon>
+        <HeaderTwo />
+      </HeadCon>
+      <Container>
+        <Title>
+          <TitFlex>
+            <LogoWhite />
+            <div>Join Renvisa as a Seller</div>
+          </TitFlex>
+          <TitSpan>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at
+            augue lacinia urna porta tempor eu vitae risus. Lorem ipsum dolor
+            sit amet, consectetur
+          </TitSpan>
+        </Title>
 
+        <Midcon>
+          <SellersCont>
+            <Sellers />
+          </SellersCont>
+        </Midcon>
 
-
-      <Midcon>
-
-      <Instot>
-
-          <InsCont>
-          <Instruc>
-            <Avatar sx={{'&:hover':{background:"#FF9471", color:"#FF9471"},background:"white" , padding:"2.5vh", marginRight:"3vh" ,color:"black"}}>
-              <Login  sx={{height:"4vh",width:"4vh", borderWidth:"1vh",padding:"2vh", background:"white", borderRadius:"50%"}} /></Avatar>
-            <InsDis>Log in
-            <InsDisSpan>Inorder to place Bulk Orders, LOG IN/ SIGN UP to your B2B Account.</InsDisSpan>
-            </InsDis>
-
-          </Instruc>
-          <VertiLine/>
-
-
-          </InsCont>
-
-
-
-          <InsCont>
-          <Instruc>
-            <Avatar sx={{'&:hover':{background:"#FF9471"},background:"white" , padding:"2.5vh", marginRight:"3vh"}}>
-              <AddCircle  sx={{height:"4vh",width:"4vh", borderWidth:"1vh",color:"black",padding:"2vh", background:"white", borderRadius:"50%"}} /></Avatar>
-            <InsDis>Add Products
-            <InsDisSpan>Add your product and brand information.</InsDisSpan>
-            </InsDis>
-
-          </Instruc>
-          <VertiLine/>
-
-
-          </InsCont>
-
-
-          <InsCont>
-          <Instruc>
-            <Avatar sx={{'&:hover':{background:"#FF9471"},background:"white" , padding:"2.5vh", marginRight:"3vh"}}>
-              <ReceiptLong  sx={{height:"4vh",width:"4vh", borderWidth:"1vh",color:"black",padding:"2vh", background:"white", borderRadius:"50%"}} /></Avatar>
-            <InsDis>Receive Purchase Order
-            <InsDisSpan>You will receive a purchase order as soon as there is one.</InsDisSpan>
-            </InsDis>
-
-          </Instruc>
-          <VertiLine/>
-
-
-          </InsCont>
-
-
-          <InsCont>
-          <Instruc>
-            <Avatar sx={{'&:hover':{background:"#FF9471"},background:"white" , padding:"2.5vh", marginRight:"3vh"}}>
-              <LocalShipping  sx={{height:"4vh",width:"4vh", borderWidth:"1vh",color:"black",padding:"2vh", background:"white", borderRadius:"50%"}} /></Avatar>
-            <InsDis>Order Picked up
-            <InsDisSpan>Once the purchase order is confirmed, it will be picked-up and dispatched.</InsDisSpan>
-            </InsDis>
-
-          </Instruc>
-          <VertiLine/>
-
-
-          </InsCont>
-
-
-          <InsCont>
-          <Instruc>
-            <Avatar sx={{'&:hover':{background:"#FF9471"},background:"white" , padding:"2.5vh", marginRight:"3vh"}}>
-              <Payment  sx={{height:"4vh",width:"4vh", borderWidth:"1vh",color:"black",padding:"2vh", background:"white", borderRadius:"50%"}} /></Avatar>
-            <InsDis>Payment Received
-            <InsDisSpan>Once the order is received, the due payment will be completed.</InsDisSpan>
-            </InsDis>
-
-          </Instruc>
-          </InsCont>
-
-          </Instot>
-
-
-      
-
-
-      <SellersCont>
-        <Sellers/>
-      </SellersCont>
-
-      </Midcon>
-
-
-
-      <FaqBox>
+        {/* <FaqBox>
         <FaqTit>Frequently asked questions</FaqTit>
-      
 
-      <CustomizedAccordions/>
+        <CustomizedAccordions />
+      </FaqBox> */}
+      </Container>
+    </div>
+  );
+};
 
-      </FaqBox>
-
-
-
-
-       
-    </Container>
-  )
-}
-
-export default SellersAccount
+export default SellersAccount;

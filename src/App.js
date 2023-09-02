@@ -55,8 +55,8 @@ function App() {
     return (
       <ContentLoader
         speed={2}
-        width={700}
-        height={300}
+        width={2000}
+        height={700}
         viewBox="0 0 700 300"
         backgroundColor="#f5f5f5"
         foregroundColor="#dbdbdb"

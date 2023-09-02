@@ -4,6 +4,7 @@ import MenuItemTwo from "./MenuItemTwo";
 import { brands, products } from "./MenuData";
 import { useEffect } from "react";
 import axios from "axios";
+import StyledLink from "../../StyLink";
 
 const Container = styled.div`
   display: flex;
@@ -90,7 +91,30 @@ function MenuDiv({ colo, arccol }) {
     return { id: index + 1, name };
   });
 
+  const allIndustries = Array.from(
+    new Set(data.map((product) => product.industry))
+  );
+  const jsonIndustry = allIndustries.map((name, index) => {
+    return { id: index + 1, name };
+  });
+
+  const allApplication = Array.from(
+    new Set(data.map((product) => product.application))
+  );
+  const jsonApplication = allApplication.map((name, index) => {
+    return { id: index + 1, name };
+  });
+
+  const allCate = Array.from(new Set(data.map((product) => product.category)));
+  const jsonCate = allCate.map((name, index) => {
+    return { id: index + 1, name };
+  });
+
   const jsonBrandfin = jsonBrand.slice(0, 9);
+  const jsonIndustryfin = jsonIndustry.slice(0, 9);
+  const jsonApplicationfin = jsonApplication.slice(0, 9);
+  const jsonCatefin = jsonCate.slice(0, 9);
+  const selectedField = "brands";
 
   return (
     <Container>
@@ -102,41 +126,48 @@ function MenuDiv({ colo, arccol }) {
         arccol={arccol}
         toggleSubMenu={toggleSubMenu1}
         isSubMenuOpen={isSubMenuOpen1}
+        field={"brand"}
       />
       <MenuItemTwo
-        cat={brands}
-        sub={products}
+        cat={jsonIndustryfin}
+        sub={data}
         head="Sectors "
         col={colo}
         arccol={arccol}
         toggleSubMenu={toggleSubMenu2}
         isSubMenuOpen={isSubMenuOpen2}
+        field={"industry"}
       />
       <MenuItemTwo
-        cat={brands}
-        sub={products}
-        head="Industries "
+        cat={jsonApplicationfin}
+        sub={data}
+        head="Application "
         col={colo}
         arccol={arccol}
         toggleSubMenu={toggleSubMenu3}
         isSubMenuOpen={isSubMenuOpen3}
+        field={"application"}
       />
       <MenuItemTwo
-        cat={brands}
-        sub={products}
+        cat={jsonCatefin}
+        sub={data}
         head="Categories "
         col={colo}
         arccol={arccol}
         toggleSubMenu={toggleSubMenu4}
         isSubMenuOpen={isSubMenuOpen4}
+        field={"category"}
       />
-      <MenuItemTwo
-        cat={brands}
-        sub={products}
-        head="Seller "
-        col={colo}
-        arccol={arccol}
-      />
+      <StyledLink to="/sellersaccount">
+        <MenuItemTwo
+          cat={brands}
+          sub={products}
+          head="Seller "
+          col={colo}
+          arccol={arccol}
+          field={"brand"}
+        />
+      </StyledLink>
     </Container>
   );
 }

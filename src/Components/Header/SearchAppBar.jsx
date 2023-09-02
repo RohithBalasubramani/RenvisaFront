@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { Products5 } from "../../data";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +45,7 @@ const List = styled("div")`
   text-overflow: ellipsis; /* enables ellipsis */
   white-space: nowrap; /* keeps the text in a single line */
   overflow: hidden;
+  margin-bottom: 0.2%;
   &:hover {
     cursor: pointer;
     background-color: #ececec;
@@ -83,6 +84,18 @@ const StyLink = styled("a")`
 //     width: "auto",
 //   },
 // }));
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "#000000",
@@ -190,9 +203,9 @@ export default function SearchAppBar({ SearchBgCol, SearchCol, SearchBorCol }) {
             <Wrapper bg={SearchBgCol}>
               {filteredProducts.map((product) => (
                 <div>
-                  <StyLink href={`/products/${product.id}`}>
-                    <List key={product.id}>{product.name}</List>
-                  </StyLink>
+                  <StyledLink to={`/products/${product._id}`}>
+                    <List key={product._id}>{product.name}</List>
+                  </StyledLink>
                 </div>
               ))}
             </Wrapper>

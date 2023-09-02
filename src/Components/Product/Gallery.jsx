@@ -113,10 +113,15 @@ const DiscImg = styled.div`
   text-align: left;
   color: #00337c;
   display: flex;
-  margin: auto;
 `;
 
-const DiscImg2 = styled.img``;
+const DiscImg2 = styled.div`
+  margin: auto;
+  position: absolute;
+
+  top: 5%;
+  left: 10%;
+`;
 
 const Gallery = ({ items }) => {
   const [currentImage, setCurrentImage] = useState(items.image);
@@ -173,13 +178,13 @@ const Gallery = ({ items }) => {
       <GalImgdiv>
         <GalImg src={currentImage} alt="product-1" onClick={handleToggle} />
         <DiscImg>
-          <DiscImg2 src={Disctag} />
-          <DiscImg>
+          <img src={Disctag} />
+          <DiscImg2>
             {Math.round(
               ((items.price - items.discounted_price) * 100) / items.price
             )}
             % off
-          </DiscImg>
+          </DiscImg2>
         </DiscImg>
       </GalImgdiv>
     </GalleryCon>

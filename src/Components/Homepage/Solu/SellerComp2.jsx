@@ -102,6 +102,17 @@ const Button = styled.div`
   letter-spacing: 1.25px;
   text-align: center;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s ease-out,
+    box-shadow 0.2s ease-out; /* Add transition properties */
+
+  /* Add hover styles */
+  &:hover {
+    background: #000000; /* Change the background color on hover */
+    color: #f5a91d;
+    transform: scale(1.02); /* Add a slight scale-up animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  }
 `;
 const SlideContBox = styled.div`
   padding-top: 15%;

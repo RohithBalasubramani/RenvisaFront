@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ProdCardTwo from "./ProdCardTwo";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import ProdCardTrend from "./ProdCardTrend";
 
 const CarouselContainer = styled.div`
   /* display: flex; */
@@ -102,7 +103,7 @@ const Carousel = ({ cards }) => {
           <Card key={index}>{card}</Card>
         ))} */}
           {cards.map((items) => (
-            <ProdCardTwo item={items} />
+            <ProdCardTrend item={items} />
           ))}
         </Slide>
       </Wrapper>

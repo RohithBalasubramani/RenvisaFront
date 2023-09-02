@@ -1,10 +1,11 @@
 import { ExpandMore, KeyboardArrowRight } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "./menusty.css"
 
 import styled from "styled-components";
 import StyledLink from "../../StyLink";
 import { ReactComponent as DDT } from "../../../Assets/Header/DDArc.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   /* display: flex; */
@@ -26,9 +27,9 @@ const Names = styled.a`
 const Wrapper = styled.div`
   position: absolute;
   top: 9vh;
-  width: 40vh;
+  width: 80vh;
   height: 45vh;
-  margin-left: -4%;
+  margin-left: -15%;
 `;
 const WrapperCont = styled.div`
   display: flex;
@@ -57,7 +58,7 @@ const WrapperHead = styled.div`
 const NamesTwo = styled.div`
   text-decoration: none;
   font-family: Lexend;
-  width: 20vh;
+  width: 40vh;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -73,17 +74,25 @@ const NamesTwo = styled.div`
   overflow: hidden;
 `;
 
+const Ellis = styled.div`
+  text-overflow: ellipsis; /* enables ellipsis */
+  white-space: nowrap; /* keeps the text in a single line */
+  overflow: hidden;
+  width: 35vh;
+`;
+
 const WrapperTwo = styled.div`
   display: block;
   flex: 1;
   background-color: #ffffff;
   height: 100%;
   padding-top: 5vh;
+  overflow-y: hidden;
 `;
 
 const WrapperTwoItems = styled.div`
   font-family: Lexend;
-  width: 20vh;
+  width: 40vh;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -96,6 +105,9 @@ const WrapperTwoItems = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap; /* keeps the text in a single line */
   overflow: hidden;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const CardArc = styled.svg`
@@ -120,19 +132,95 @@ function MenuItemTwo({
   arccol,
   isSubMenuOpen,
   toggleSubMenu,
+  field,
 }) {
   const [selectedCat, setSelectedCat] = useState(null);
+  const [filteredSub, setfilteredSub] = useState(null);
 
   function handleCatClick(menuitem) {
     setSelectedCat(menuitem.name);
   }
 
-  const filteredSub = sub.filter((product) => product.brand === selectedCat);
+  useEffect(() => {
+    if (field === "brand") {
+      const temp = sub.filter((product) => product.brand === selectedCat);
+      const uniqueSubCategories = new Set();
+      const uniqueTemp = temp.filter((product) => {
+        if (!uniqueSubCategories.has(product.sub_category)) {
+          uniqueSubCategories.add(product.sub_category);
+          return true;
+        }
+        return false;
+      });
+      setfilteredSub(uniqueTemp);
+    } else if (field === "industry") {
+      const temp = sub.filter((product) => product.industry === selectedCat);
+      const uniqueSubCategories = new Set();
+      const uniqueTemp = temp.filter((product) => {
+        if (!uniqueSubCategories.has(product.sub_category)) {
+          uniqueSubCategories.add(product.sub_category);
+          return true;
+        }
+        return false;
+      });
+      setfilteredSub(uniqueTemp);
+    } else if (field === "application") {
+      const temp = sub.filter((product) => product.application === selectedCat);
+      const uniqueSubCategories = new Set();
+      const uniqueTemp = temp.filter((product) => {
+        if (!uniqueSubCategories.has(product.sub_category)) {
+          uniqueSubCategories.add(product.sub_category);
+          return true;
+        }
+        return false;
+      });
+      setfilteredSub(uniqueTemp);
+    } else if (field === "category") {
+      const temp = sub.filter((product) => product.category === selectedCat);
+      const uniqueSubCategories = new Set();
+      const uniqueTemp = temp.filter((product) => {
+        if (!uniqueSubCategories.has(product.sub_category)) {
+          uniqueSubCategories.add(product.sub_category);
+          return true;
+        }
+        return false;
+      });
+      setfilteredSub(uniqueTemp);
+    }
+  }, [field, selectedCat, sub]);
+
+  // const filteredSub = sub.filter((product) => product.brand === selectedCat);
+
+  // if (field == "brand") {
+  //   const filteredSub = sub.filter((product) => product.brand === selectedCat);
+  //   // setfilteredSub(temp);
+  // } else if (field == "industry") {
+  //   const filteredSub = sub.filter(
+  //     (product) => product.industry === selectedCat
+  //   );
+  //   // setfilteredSub(temp);
+  // }
+  // else if (condition3) {
+  //   const temp = sub.filter((product) => product.brand === selectedCat);
+  //   setfilteredSub(temp);
+  // } else if (condition4) {
+  //   const temp = sub.filter((product) => product.brand === selectedCat);
+  //   setfilteredSub(temp);
+  // } else {
+  //   // Code to execute if none of the conditions are true
+  // }
 
   const [isSubMenuTwoOpen, setIsSubMenuTwoOpen] = useState(false);
+  const [search, setsearch] = useState("");
 
   const toggleSubMenuTwo = () => {
     setIsSubMenuTwoOpen(!isSubMenuTwoOpen);
+  };
+
+  const navigate = useNavigate();
+
+  const handleSearchButtonClick = (searchQuery) => {
+    // navigate(`/product?search=${searchQuery}`);
   };
 
   return (
@@ -163,10 +251,10 @@ function MenuItemTwo({
 
               {cat.map((menuItem) => (
                 <NamesTwo
-                  key={menuItem.id}
+                  key={menuItem._id}
                   onClick={() => handleCatClick(menuItem)}
                 >
-                  <div>{menuItem.name}</div>
+                  <Ellis>{menuItem.name}</Ellis>
                   <KeyboardArrowRight
                     sx={{ marginRight: "2px", marginLeft: "auto" }}
                   />
@@ -176,9 +264,11 @@ function MenuItemTwo({
 
             <WrapperTwo>
               {filteredSub.map((subMenuItem) => (
-                <WrapperTwoItems key={subMenuItem.id}>
-                  {subMenuItem.name}
-                </WrapperTwoItems>
+                <StyledLink to={`/product?search=${subMenuItem.sub_category}`}>
+                  <WrapperTwoItems key={subMenuItem._id}>
+                    {subMenuItem.sub_category}
+                  </WrapperTwoItems>
+                </StyledLink>
               ))}
             </WrapperTwo>
           </WrapperCont>

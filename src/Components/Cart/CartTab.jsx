@@ -333,7 +333,9 @@ const CartTab = () => {
                           Quantity{" "}
                           <Remove
                             onClick={
-                              row.qnty <= 1 ? () => dlt(row.id) : () => rmv(row)
+                              row.qnty <= 1
+                                ? () => dlt(row._id)
+                                : () => rmv(row)
                             }
                           />{" "}
                           <QuantBox>{row.qnty}</QuantBox>{" "}
@@ -369,7 +371,7 @@ const CartTab = () => {
                           marginTop: "0%",
                           marginBottom: "55%",
                         }}
-                        onClick={() => dlt(row.id)}
+                        onClick={() => dlt(row._id)}
                       >
                         <DeleteIcon />{" "}
                       </IconButton>

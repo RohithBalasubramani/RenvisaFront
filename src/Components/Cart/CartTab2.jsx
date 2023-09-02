@@ -6,20 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DLT, ADD, REMOVE } from "../../Redux/actions/action";
 import styled from "styled-components";
 import { ReactComponent as CartEmpty } from "../../Assets/EmptyCart.svg";
-
-import Menu from "@mui/icons-material/Menu";
-import {
-  IconButton,
-  Tab,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableHead,
-} from "@mui/material";
-import { Delete } from "@mui/icons-material";
-import cartgif from "../../Assets/cart.gif";
-import Avatar from "@mui/material/Avatar";
+import StyledLink from "../StyLink";
 
 const Container = styled.div`
   height: max-content;
@@ -232,6 +219,32 @@ const Button = styled.button`
   }
 `;
 
+const ButtonCont = styled.button`
+  width: 100%;
+  padding: 2vh;
+  padding-left: 30%;
+  font-family: Lexend;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  border: 0ch;
+  border-radius: 8px;
+  text-decoration: none;
+
+  background: #ffffff;
+  color: #00337c;
+  border-radius: 8px;
+  border: 1px solid #000;
+  margin-top: 2vh;
+
+  &:hover {
+    border: 2px solid #00337c;
+    color: #000;
+  }
+`;
+
 const EmptyCart = styled.div`
   display: flex;
   flex-direction: column;
@@ -279,7 +292,7 @@ const CartTab2 = () => {
   console.log(price);
 
   const getdata = useSelector((state) => state.cartreducer.carts);
-  // console.log(getdata);
+  console.log(getdata);
 
   const dispatch = useDispatch();
 
@@ -356,9 +369,14 @@ const CartTab2 = () => {
               </SummaryItem>
               <SummaryItem type="total">
                 <SummaryItemText type="total">Total</SummaryItemText>
-                <SummaryItemPrice>₹ {Math.ceil(price)}</SummaryItemPrice>
+                <SummaryItemPrice>
+                  ₹ {Math.ceil(price) + Math.ceil(price * 0.18)}
+                </SummaryItemPrice>
               </SummaryItem>
               <Button>CHECKOUT NOW</Button>
+              <StyledLink to="/">
+                <ButtonCont>Continue Shopping</ButtonCont>
+              </StyledLink>
             </Summary>
           </Bottom>
         </Wrapper>

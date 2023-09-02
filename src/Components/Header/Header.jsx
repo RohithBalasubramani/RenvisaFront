@@ -42,6 +42,7 @@ import { useEffect } from "react";
 import MenuDiv from "../Toolbar/MenuExample/MenuDiv";
 import { ReactComponent as RenLogo } from "../../Assets/RenLogo.svg";
 import { logout } from "../../Redux/actions/action";
+import LogoCustom from "./LogoCustom";
 
 const HeaderBar = styled.div`
   background: rgb(255, 255, 255, ${(props) => props.bg});
@@ -109,6 +110,7 @@ const Dropdowncontent = styled.div`
   max-height: 80vh;
   overflow-y: scroll;
   border-radius: 8px;
+  right: 2.5vh;
 
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -118,10 +120,10 @@ const Dropdowncontent = styled.div`
 `;
 
 const Dropdown = styled.div`
-  position: relative;
+  position: absolute;
   display: inline-block;
-  margin-left: 0;
-  direction: rtl;
+  right: 3vh;
+  /* direction: rtl; */
   width: auto;
   &:hover ${Dropdowncontent} {
     display: block;
@@ -353,37 +355,45 @@ function Header() {
               <Tooltip title="Open settings">
                 <IconButton
                   onClick={handleOpenUserMenu}
-                  sx={{ p: 0, paddingLeft: "2vh", paddingRight: "2vh" }}
+                  sx={{ position: "absolute", right: "5vw", top: "2vh" }}
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_647_6135)">
-                      <path
-                        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                        stroke={MenuColor}
-                        stroke-width="2.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21"
-                        stroke={MenuColor}
-                        stroke-width="2.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_647_6135">
-                        <rect width="24" height="24" fill={MenuColor} />
-                      </clipPath>
-                    </defs>
-                  </svg>
+                  {authStatus ? (
+                    // If authenticated, show the avatar
+                    <Avatar sx={{ marginRight: "-1vw", marginTop: "-1.2vh" }}>
+                      T
+                    </Avatar>
+                  ) : (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      onClick={handleToggle}
+                    >
+                      <g clip-path="url(#clip0_647_6135)">
+                        <path
+                          d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+                          stroke={MenuColor}
+                          stroke-width="2.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21"
+                          stroke={MenuColor}
+                          stroke-width="2.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_647_6135">
+                          <rect width="24" height="24" fill={MenuColor} />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  )}
                 </IconButton>
               </Tooltip>
               <Menu
@@ -447,11 +457,7 @@ function Header() {
                       Logout
                     </MenuItem>
                   </>
-                ) : (
-                  <MenuItem onClick={handleToggle}>
-                    <Avatar /> Login
-                  </MenuItem>
-                )}
+                ) : null}
               </Menu>
             </Box>
 

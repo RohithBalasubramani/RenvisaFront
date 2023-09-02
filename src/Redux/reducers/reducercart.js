@@ -5,18 +5,27 @@ const INIT_STATE = {
 export const cartreducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "ADD_CART":
-      const IteamIndex = state.carts.findIndex(
-        (iteam) => iteam.id === action.payload.id
+      const itemIndex = state.carts.findIndex(
+        (item) => item._id === action.payload._id
       );
 
-      if (IteamIndex >= 0) {
-        state.carts[IteamIndex].qnty += 1;
+      if (itemIndex >= 0) {
+        const updatedCart = state.carts.map((item, index) => {
+          if (index === itemIndex) {
+            return {
+              ...item,
+              qnty: item.qnty + 1,
+            };
+          }
+          return item;
+        });
+
         return {
           ...state,
-          carts: [...state.carts],
+          carts: updatedCart,
         };
       } else {
-        const temp = { ...action.payload };
+        const temp = { ...action.payload, qnty: 1 };
         return {
           ...state,
           carts: [...state.carts, temp],
@@ -24,33 +33,42 @@ export const cartreducer = (state = INIT_STATE, action) => {
       }
 
     case "RMV_CART":
-      const data = state.carts.filter((el) => el.id !== action.payload);
-      // console.log(data);
-
+      const updatedCart = state.carts.filter(
+        (item) => item._id !== action.payload
+      );
       return {
         ...state,
-        carts: data,
+        carts: updatedCart,
       };
 
     case "RMV_ONE":
-      const IteamIndex_dec = state.carts.findIndex(
-        (iteam) => iteam.id === action.payload.id
+      const itemIndexDec = state.carts.findIndex(
+        (item) => item._id === action.payload._id
       );
 
-      if (state.carts[IteamIndex_dec].qnty >= 1) {
-        const dltiteams = (state.carts[IteamIndex_dec].qnty -= 1);
-        console.log([...state.carts, dltiteams]);
+      if (itemIndexDec >= 0 && state.carts[itemIndexDec].qnty > 1) {
+        const updatedCart = state.carts.map((item, index) => {
+          if (index === itemIndexDec) {
+            return {
+              ...item,
+              qnty: item.qnty - 1,
+            };
+          }
+          return item;
+        });
 
         return {
           ...state,
-          carts: [...state.carts],
+          carts: updatedCart,
         };
-      } else if (state.carts[IteamIndex_dec].qnty === 1) {
-        const data = state.carts.filter((el) => el.id !== action.payload);
+      } else {
+        const updatedCart = state.carts.filter(
+          (item) => item._id !== action.payload._id
+        );
 
         return {
           ...state,
-          carts: data,
+          carts: updatedCart,
         };
       }
 

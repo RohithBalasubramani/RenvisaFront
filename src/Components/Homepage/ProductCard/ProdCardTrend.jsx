@@ -5,6 +5,8 @@ import { ADD } from "../../../Redux/actions/action";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import StyRating from "./StyRating";
+import Disctag from "../../../Assets/BestSeller.svg";
+import { ReactComponent as CartLogo } from "../../../Assets/Header/Cart.svg";
 
 const Container = styled.div``;
 
@@ -133,13 +135,18 @@ const ProdPriceOld = styled.div`
   margin-left: 2%;
 `;
 
-const RefNum = styled.div`
-  color: var(--gray-3, #828282);
-  font-family: Lexend;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 28px; /* 233.333% */
+const Addtocart = styled.div`
+  z-index: 5;
+  position: absolute;
+  padding: 1vh;
+  transform: scale(0.8);
+  opacity: 0;
+
+  bottom: 5%;
+  right: 5%;
+  background-color: #ffffff;
+  color: #828282;
+  border-radius: 100%;
 `;
 
 const Card = styled.div`
@@ -168,6 +175,11 @@ const Card = styled.div`
     padding-top: 0.5vh;
   }
 
+  &:hover ${Addtocart} {
+    opacity: 1;
+    transition: 0.5s;
+  }
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   }
@@ -185,12 +197,45 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const DiscImg = styled.div`
+  z-index: 5;
+  position: absolute;
+
+  top: 0%;
+  left: 0%;
+
+  font-family: Lexend;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: #00337c;
+  display: flex;
+`;
+
+const DiscImg2 = styled.div`
+  margin: auto;
+  position: absolute;
+
+  top: 15%;
+  left: 10%;
+`;
+
 const ProdCardTrend = ({ item }) => {
   const dispatch = useDispatch();
 
   const send = (e) => {
     // console.log(e);
-    dispatch(ADD(e));
+
+    dispatch(ADD({ ...e, qnty: 1 }));
+  };
+
+  const handleAddToCartClick = (event) => {
+    // Prevent the Link from navigating
+    event.stopPropagation();
+    // Handle the "Add to Cart" action here
+    send(item);
   };
 
   return (
@@ -198,6 +243,13 @@ const ProdCardTrend = ({ item }) => {
       <Card>
         <StyledLink to={`/products/${item._id}`}>
           <CardImgBox>
+            <DiscImg>
+              <img src={Disctag} />
+              <DiscImg2>Best Seller</DiscImg2>
+            </DiscImg>
+            {/* <Addtocart onClick={handleAddToCartClick}>
+              <CartLogo />
+            </Addtocart> */}
             {/* <Image/> */}
             <CardImage src={item.image}></CardImage>
           </CardImgBox>

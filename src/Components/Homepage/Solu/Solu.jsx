@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BoldSecondWord from "./BoldSecond";
 import im3 from "../../../Assets/Slider/solar technician 1.jpeg";
+import StyledLink from "../../StyLink";
 
 const Container = styled.div`
   width: 100%;
@@ -65,6 +66,7 @@ const SlideB = styled.div`
 const SlideContBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 4vh;
   padding-top: 15%;
   padding-bottom: 15%;
@@ -137,6 +139,17 @@ const Button = styled.div`
   letter-spacing: 1.25px;
   text-align: center;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s ease-out,
+    box-shadow 0.2s ease-out; /* Add transition properties */
+
+  /* Add hover styles */
+  &:hover {
+    background: #000000; /* Change the background color on hover */
+    color: #f5a91d;
+    transform: scale(1.02); /* Add a slight scale-up animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  }
 `;
 
 const Solu = ({ Items, interval = 5000 }) => {
@@ -179,7 +192,9 @@ const Solu = ({ Items, interval = 5000 }) => {
                   lacus metus, tempor at imperdiet at, consectetur sit amet
                   ligula.
                 </ContBoxCont>
-                <Button>TRY NOW</Button>
+                <StyledLink to={`/product?search=${item.title}`}>
+                  <Button>View More</Button>
+                </StyledLink>
               </SlideContBox>
             </SlideB>
           ))}

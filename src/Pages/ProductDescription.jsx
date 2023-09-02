@@ -3,21 +3,11 @@ import styled from "styled-components";
 import Gallery from "../Components/Product/Gallery";
 import NavBreadcrumbs from "../Components/Product/NavBreadcrumbs";
 import "../Components/Product/Prodess.css";
-import {
-  Add,
-  History,
-  Inventory2,
-  LabelImportant,
-  Remove,
-  SystemSecurityUpdateWarning,
-  ThumbDown,
-  ZoomIn,
-} from "@mui/icons-material";
+import { Add, Remove } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { DLT, ADD, REMOVE } from "../Redux/actions/action";
 import RatingComponent from "../Components/PDP/RatingComponent";
 import { useParams } from "react-router-dom";
-import Header from "../Components/Header/Header";
 import { reviewdatatrail } from "../Components/Homepage/Trail/traildata";
 import ReturnPolicy from "../Components/PDP/ReturnPolicy";
 import ProdInfo from "../Components/PDP/ProdInfo";
@@ -549,7 +539,7 @@ const ProductDescription = ({ products }) => {
 
   const send = (e) => {
     // console.log(e);
-    console.log(getdata[0]);
+    // console.log(getdata[0]);
 
     dispatch(ADD({ ...e, qnty: quantity }));
   };
