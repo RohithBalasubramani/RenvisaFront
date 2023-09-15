@@ -1,14 +1,21 @@
 {
   "files": {
     "main.css": "/RenvisaFront/static/css/main.87abafb0.css",
-    "main.js": "/RenvisaFront/static/js/main.731ec589.js",
+    "main.js": "/RenvisaFront/static/js/main.3dc8ffba.js",
     "static/js/787.c5429df2.chunk.js": "/RenvisaFront/static/js/787.c5429df2.chunk.js",
     "static/media/solar technician 1.jpeg": "/RenvisaFront/static/media/solar technician 1.03d66eea647e7dcac2e8.jpeg",
     "static/media/solar farm.jpg": "/RenvisaFront/static/media/solar farm.964a59348cb96beaca94.jpg",
+    "static/media/Industry.jpg": "/RenvisaFront/static/media/Industry.49e9f2a3e12625b0e1e6.jpg",
+    "static/media/FactoryWork.jpg": "/RenvisaFront/static/media/FactoryWork.a764ad51de7353241c47.jpg",
     "static/media/SolCat.png": "/RenvisaFront/static/media/SolCat.9c9b70e005907c53b7e8.png",
     "static/media/factory workshop.jpg": "/RenvisaFront/static/media/factory workshop.b9d096159f7823a1d1e4.jpg",
     "static/media/Slider.png": "/RenvisaFront/static/media/Slider.19d1ddd60bad2d3e4986.png",
+    "static/media/SellersBack.jpg": "/RenvisaFront/static/media/SellersBack.7911601339829f3693f8.jpg",
     "static/media/ArmouredCable.png": "/RenvisaFront/static/media/ArmouredCable.fe039d023484bc9f0a72.png",
+    "static/media/Lugs.jpg": "/RenvisaFront/static/media/Lugs.de76c3ae47b3fb06f9e3.jpg",
+    "static/media/HealthSafety.jpg": "/RenvisaFront/static/media/HealthSafety.47190964a66d64bc2886.jpg",
+    "static/media/SolarPanels.jpg": "/RenvisaFront/static/media/SolarPanels.1761471f66a83934bb5a.jpg",
+    "static/media/AboutUsStock.jpg": "/RenvisaFront/static/media/AboutUsStock.511fe659815c616d52b8.jpg",
     "static/media/p4.png": "/RenvisaFront/static/media/p4.7c8fc934eeb1bace588e.png",
     "static/media/CableTies.png": "/RenvisaFront/static/media/CableTies.af32321cdd07756c1cf0.png",
     "static/media/Mount.png": "/RenvisaFront/static/media/Mount.f8a0a18f0d6e503460a7.png",
@@ -30,6 +37,7 @@
     "static/media/WaterHeater.png": "/RenvisaFront/static/media/WaterHeater.73a618d638a5cb11e7fd.png",
     "static/media/kavishenterprises.png": "/RenvisaFront/static/media/kavishenterprises.b3fde315995813178bfc.png",
     "static/media/sukamfusion.png": "/RenvisaFront/static/media/sukamfusion.8d27d617fc963831163c.png",
+    "static/media/Vikram_Solar_logo.svg.png": "/RenvisaFront/static/media/Vikram_Solar_logo.svg.445fb6cf717e53d8ac62.png",
     "static/media/lc.jpg": "/RenvisaFront/static/media/lc.d83911e9518b3687cc9c.jpg",
     "static/media/mounting-structures 1.png": "/RenvisaFront/static/media/mounting-structures 1.cec53de0b551595c0b0b.png",
     "static/media/ultracab.png": "/RenvisaFront/static/media/ultracab.c83ef4c9c70c5081d2e4.png",
@@ -80,11 +88,11 @@
     "static/media/BestSeller.svg": "/RenvisaFront/static/media/BestSeller.ce42bd21e5fd36b91110ea437c3625fa.svg",
     "static/media/DDArc.svg": "/RenvisaFront/static/media/DDArc.6d8c850a622f3e6c59f98b5ecc2f94d8.svg",
     "main.87abafb0.css.map": "/RenvisaFront/static/css/main.87abafb0.css.map",
-    "main.731ec589.js.map": "/RenvisaFront/static/js/main.731ec589.js.map",
+    "main.3dc8ffba.js.map": "/RenvisaFront/static/js/main.3dc8ffba.js.map",
     "787.c5429df2.chunk.js.map": "/RenvisaFront/static/js/787.c5429df2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.87abafb0.css",
-    "static/js/main.731ec589.js"
+    "static/js/main.3dc8ffba.js"
   ]
 }
