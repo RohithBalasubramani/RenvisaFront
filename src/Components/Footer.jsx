@@ -3,6 +3,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import styled from "styled-components";
 import Logo from "./Header/Logo";
 import StyledLink from "./StyLink";
+import { useState } from "react";
+import axios from "axios";
+import { Alert, Snackbar } from "@mui/material";
 
 const Container = styled.div`
   display: block;
@@ -140,7 +143,7 @@ const Payment = styled.img`
   width: 50%;
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   color: #333;
   font-family: Lexend;
   font-size: 14px;
@@ -199,6 +202,45 @@ const InputDiv = styled.input`
 `;
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("https://renvisa.org/api/subscribe/", {
+        email,
+      });
+
+      if (response.status === 201) {
+        setMessage("Subscription successful");
+        setSeverity("success");
+        setEmail(""); // Clear the email input after successful subscription
+      } else {
+        setMessage("Subscription failed");
+        setSeverity("error");
+      }
+
+      setOpen(true);
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("Something went wrong");
+      setSeverity("error");
+      setOpen(true);
+    }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <Container>
       <LogoDiv>
@@ -217,8 +259,14 @@ const Footer = () => {
           <NewsletterContainer>
             <Title>Newsletter</Title>
             <InputCon>
-              <InputDiv placeholder="Please Enter your Email" />
-              <Button>Subscribe</Button>
+              <InputDiv
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Please Enter your Email"
+              />
+              <Button type="submit" onClick={handleSubscribe}>
+                Subscribe
+              </Button>
             </InputCon>
             <br />
             Subscribe to the Renvisa newsletter to receive exclusive content,
@@ -276,6 +324,11 @@ const Footer = () => {
           <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
         </Right>
       </Wrapper>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity}>
+          {message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
