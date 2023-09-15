@@ -4,6 +4,8 @@ import ProductCard from "../Homepage/ProductCard/ProductCard";
 import styled from "styled-components";
 import { ChevronRight } from "@mui/icons-material";
 import ProdCardTwo from "../Homepage/ProductCard/ProdCardTwo";
+import { useNavigate } from "react-router-dom";
+import StyledLink from "../StyLink";
 
 const Container = styled.div`
   background-color: #fdfdfd;
@@ -20,7 +22,7 @@ const HeadSpan = styled.div`
   text-align: left;
   margin-right: 0%;
   margin-left: auto;
-  padding-right: 3vh;
+  padding-right: 0vh;
   display: inline-flex;
   &:hover {
     text-decoration: underline;
@@ -53,8 +55,19 @@ const ProdWrapper = styled.div`
   gap: 3vh;
 `;
 
-const SimilarProd = ({ data }) => {
+const Flex = styled.div`
+  display: flex;
+`;
+
+const SimilarProd = ({ data, sub }) => {
   const [limitedData, setLimitedData] = useState(data.slice(0, 5));
+  const navigate = useNavigate();
+
+  const handleSearchButtonClick = ({ search }) => {
+    navigate(`/product?search=${search}`);
+  };
+
+  console.log(data, "this is consoledata");
 
   return (
     <Container>
@@ -62,7 +75,11 @@ const SimilarProd = ({ data }) => {
         <Head>
           Similar Products{" "}
           <HeadSpan>
-            <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
+            <StyledLink to={`/product?search=${sub}`}>
+              <Flex>
+                <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
+              </Flex>
+            </StyledLink>
           </HeadSpan>
         </Head>
         <ProdWrapper>

@@ -1,20 +1,8 @@
-import {
-  Facebook,
-  FacebookOutlined,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Search,
-  Twitter,
-} from "@mui/icons-material";
+import { Phone, Room } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
-import InstagramIcon from "@mui/icons-material/Instagram";
-
 import styled from "styled-components";
-import LogoWhite from "./Header/LogoWhite";
 import Logo from "./Header/Logo";
+import StyledLink from "./StyLink";
 
 const Container = styled.div`
   display: block;
@@ -48,16 +36,6 @@ const Left = styled.div`
 
 const LogoDiv = styled.div`
   display: flex;
-`;
-
-const Span = styled.div`
-  font-style: italic;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 140%;
-  text-transform: none;
-  margin-top: 0vh;
-  margin-bottom: 3vh;
 `;
 
 const Desc = styled.p`
@@ -96,7 +74,7 @@ const SocialIcon = styled.div`
 `;
 
 const Center = styled.div`
-  flex: 1;
+  flex: 0.45;
   padding: 20px;
   padding-top: 5px;
 `;
@@ -115,8 +93,8 @@ const List = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
+  padding-left: 0.5vh;
 `;
 
 const ListItem = styled.li`
@@ -128,10 +106,20 @@ const ListItem = styled.li`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Right = styled.div`
   flex: 1;
+  padding: 20px;
+  padding-top: 5px;
+`;
+
+const RightTwo = styled.div`
+  flex: 0.7;
   padding: 20px;
   padding-top: 5px;
 `;
@@ -222,10 +210,8 @@ const Footer = () => {
       <Wrapper>
         <Left>
           <Desc>
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, by injected
-            humour, or randomised words which don’t look even slightly
-            believable.
+            Transforming B2B trade by empowering businesses to seamlessly
+            connect, transact, and prosper.
           </Desc>
 
           <NewsletterContainer>
@@ -237,58 +223,42 @@ const Footer = () => {
             <br />
             Subscribe to the Renvisa newsletter to receive exclusive content,
             offers and discounts!
-            {/* <Paper
-          component="form"
-          sx={{ display: 'flex', alignItems: 'center', width: "95%" , marginTop:"1vh", marginBottom:"1vh"}}
-        >
-
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Enter your Email Address"
-            inputProps={{ 'aria-label': 'search google maps' }}
-          /> */}
-            {/* 
-          <Button type="button" sx={{ p: '10px',
-                 bgcolor: '#3A8891',
-                color:"#FFEFD6",
-                '&:hover': {
-                  bgcolor: '#0E5E6F',
-                }}} aria-label="search">
-            Signme Up
-          </Button>
-
-        </Paper> */}
-            {/* <SocialContainer>
-              <SocialIcon color="000000">
-                <FacebookOutlined />
-              </SocialIcon>
-              <SocialIcon color="E4405F">
-                <InstagramIcon />
-              </SocialIcon>
-              <SocialIcon color="55ACEE">
-                <Twitter />
-              </SocialIcon>
-              <SocialIcon color="E60023">
-                <Pinterest />
-              </SocialIcon>
-            </SocialContainer> */}
           </NewsletterContainer>
         </Left>
+
         <Center>
           <Title>Shop With us</Title>
           <List>
             <ListItem>Categories</ListItem>
             <ListItem>Brands</ListItem>
             <ListItem>Sectors</ListItem>
+            <ListItem>Application</ListItem>
           </List>
-          <br></br>
+        </Center>
+
+        <RightTwo>
           <Title>We Provide Solutions</Title>
           <List>
             <ListItem>About Us</ListItem>
-            <ListItem>Contact Us</ListItem>
-            <ListItem>Track Order</ListItem>
+            {/* <ListItem>Contact Us</ListItem> */}
+            <StyledLink to="/orders">
+              <ListItem>Track Order</ListItem>
+            </StyledLink>
+            <StyledLink to="/cookiepolicy">
+              <ListItem>Cookie Policy</ListItem>
+            </StyledLink>
+            <StyledLink to="/termsofservice">
+              <ListItem>Terms of Service</ListItem>
+            </StyledLink>
+            <StyledLink to="/disclaimer">
+              <ListItem>Disclaimer</ListItem>
+            </StyledLink>
+            <StyledLink to="/privacypolicy">
+              <ListItem>Privacy Policy</ListItem>
+            </StyledLink>
           </List>
-        </Center>
+        </RightTwo>
+
         <Right>
           <Title>Contact</Title>
           <ContactItem>

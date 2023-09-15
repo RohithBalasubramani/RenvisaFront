@@ -254,6 +254,15 @@ const Sellers = () => {
             <p>Email</p>
           </PassCont>
           <CustomTextFeild placeholder="Enter your Email ID" fullWidth />
+
+          <PassCont>
+            <p>GST Number</p>
+          </PassCont>
+          <CustomTextFeild
+            placeholder="Please Enter Your GST Number"
+            fullWidth
+          />
+
           <PassCont>
             <p>Mobile Number</p>
           </PassCont>

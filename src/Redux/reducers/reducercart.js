@@ -10,11 +10,12 @@ export const cartreducer = (state = INIT_STATE, action) => {
       );
 
       if (itemIndex >= 0) {
+        const temp = { ...action.payload };
         const updatedCart = state.carts.map((item, index) => {
           if (index === itemIndex) {
             return {
               ...item,
-              qnty: item.qnty + 1,
+              qnty: temp.qnty,
             };
           }
           return item;
@@ -25,7 +26,7 @@ export const cartreducer = (state = INIT_STATE, action) => {
           carts: updatedCart,
         };
       } else {
-        const temp = { ...action.payload, qnty: 1 };
+        const temp = { ...action.payload };
         return {
           ...state,
           carts: [...state.carts, temp],

@@ -23,7 +23,7 @@ import React from "react";
 import styled from "styled-components";
 import CustomizedAccordions from "../Components/Bulkquery/Accordion";
 import Sellers from "../Components/SellersAccount/Sellers";
-import SliderBack from "../Assets/Slider/Slider.png";
+import SliderBack from "../Assets/Sellers/SellersBack.jpg";
 import Logo from "../Components/Header/Logo";
 import LogoWhite from "../Components/Header/LogoWhite";
 import HeaderTwo from "../Components/Header/HeaderTwo";

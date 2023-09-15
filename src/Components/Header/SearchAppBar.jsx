@@ -162,7 +162,22 @@ export default function SearchAppBar({ SearchBgCol, SearchCol, SearchBorCol }) {
   }, [searchQuery]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div>
+        <Cont bg={SearchBgCol} bor={SearchBorCol} col={SearchCol}>
+          <div>
+            <StyledInputBase
+              placeholder="Search Products, Brands, ..."
+              inputProps={{ "aria-label": "search" }}
+            />
+
+            <IconButton sx={{ color: { SearchCol } }}>
+              <SearchIcon />
+            </IconButton>
+          </div>
+        </Cont>
+      </div>
+    );
   }
 
   if (error) {

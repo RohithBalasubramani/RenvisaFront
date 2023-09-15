@@ -149,11 +149,7 @@ const Review = () => {
                   </CardStatus>
                 </CardTagline>
               </CardHeader>
-              <CardDes>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                ullam assumenda nesciunt maiores iusto. Soluta quas fuga earum
-                amet porro?
-              </CardDes>
+              <CardDes>{item.desc}</CardDes>
             </CardOverlay>
           </Card>
         ))}

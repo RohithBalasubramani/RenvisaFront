@@ -34,6 +34,11 @@ import Orders from "./Pages/Orders";
 import { fetchData } from "./Redux/actions/action";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
+import AboutUs from "./Pages/AboutUs";
+import TermsOfService from "./Pages/TermsOfService";
+import CookiePolicy from "./Pages/Cookies";
+import Disclaimer from "./Pages/Disclaimer";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   // Get the list of products from your data source
@@ -54,22 +59,17 @@ function App() {
   if (loading) {
     return (
       <ContentLoader
-        speed={2}
-        width={2000}
+        speed={10}
+        width={1500}
         height={700}
-        viewBox="0 0 700 300"
-        backgroundColor="#f5f5f5"
-        foregroundColor="#dbdbdb"
+        viewBox="0 0 1500 700"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb"
       >
-        <rect x="12" y="35" rx="0" ry="0" width="6" height="246" />
-        <rect x="14" y="34" rx="0" ry="0" width="408" height="6" />
-        <rect x="416" y="34" rx="0" ry="0" width="6" height="246" />
-        <rect x="12" y="276" rx="0" ry="0" width="408" height="6" />
-        <rect x="150" y="53" rx="6" ry="6" width="127" height="15" />
-        <rect x="37" y="77" rx="7" ry="7" width="361" height="139" />
-        <rect x="58" y="225" rx="0" ry="0" width="316" height="8" />
-        <rect x="86" y="238" rx="0" ry="0" width="267" height="8" />
-        <rect x="58" y="252" rx="0" ry="0" width="316" height="8" />
+        <rect x="95" y="20" rx="16" ry="16" width="110" height="40" />
+        <rect x="40" y="100" rx="14" ry="14" width="1400" height="550" />
+        <rect x="220" y="20" rx="26" ry="26" width="580" height="40" />
+        <circle cx="60" cy="40" r="20" />
       </ContentLoader>
     );
   }
@@ -106,6 +106,11 @@ function App() {
         {/* <Route path="/products/:id"><ProductDescription products={Products4} /></Route> */}
         {/* <Route exact path="/products"><ProductListing /></Route> */}
         <Route exact path="/orders" element={<Orders />} />
+        <Route exact path="/aboutus" element={<AboutUs />} />
+        <Route exact path="/termsofservice" element={<TermsOfService />} />
+        <Route exact path="/cookiepolicy" element={<CookiePolicy />} />
+        <Route exact path="/disclaimer" element={<Disclaimer />} />
+        <Route exact path="/privacypolicy" element={<PrivacyPolicy />} />
       </Routes>
 
       <Footer />

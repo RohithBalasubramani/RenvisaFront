@@ -8,17 +8,16 @@ const BoldSecondWord = ({ sentence }) => {
       {words.map((word, index) => {
         if (index === 1) {
           return (
-            <div
+            <span
               key={index}
               style={{
                 fontWeight: "300",
                 marginLeft: ".8rem",
                 marginRight: ".8rem",
-                display: "inline",
               }}
             >
               {word}
-            </div>
+            </span>
           );
         }
 
@@ -30,10 +29,9 @@ const BoldSecondWord = ({ sentence }) => {
 
 const StyledParagraph = styled.p`
   font-family: Lexend;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 500;
   line-height: 80px;
-  width: 40vw;
   letter-spacing: 0.004em;
   text-align: left;
   color: #00337c;

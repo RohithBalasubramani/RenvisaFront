@@ -296,6 +296,7 @@ const BuyNow = styled.button`
   flex: 1;
   text-transform: uppercase;
   transition: 0.3s;
+  /* filter: grayscale(1); */
   &:hover {
     background-color: #1f1f1f;
     color: #f5a91d;
@@ -540,8 +541,10 @@ const ProductDescription = ({ products }) => {
   const send = (e) => {
     // console.log(e);
     // console.log(getdata[0]);
-
+    console.log("Before dispatch - quantity:", quantity);
+    console.log("Before dispatch - e:", e);
     dispatch(ADD({ ...e, qnty: quantity }));
+    console.log("After dispatch - e:", e);
   };
 
   const rmv = (_id) => {
@@ -672,7 +675,7 @@ const ProductDescription = ({ products }) => {
               <StockBox>In Stock.</StockBox>
 
               <CartLine>
-                <BuyNow>Buy Now </BuyNow>
+                <BuyNow disabled={true}>Buy Now </BuyNow>
                 <CartlineButton onClick={() => send(product)}>
                   Add to cart
                 </CartlineButton>
@@ -735,7 +738,10 @@ const ProductDescription = ({ products }) => {
           {responseMessage}
         </Alert>
       </Snackbar> */}
-      <SimilarProd data={productsWithSameSubcategory} />
+      <SimilarProd
+        data={productsWithSameSubcategory}
+        sub={referenceProductSubcategory}
+      />
     </ContainerWhole>
   );
 };

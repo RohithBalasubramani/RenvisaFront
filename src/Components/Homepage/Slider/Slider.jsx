@@ -331,15 +331,10 @@ const Slider = ({ Items }) => {
               <InfoContainer>
                 <Center isVisible={isVisible}>
                   <Title>{item.title}</Title>
-                  <Desc>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Repudiandae aspernatur dolorem dolores! Tenetur inventore,
-                    sit eligendi, ea dicta totam quas autem illum, cumque
-                    obcaecati mollitia ex reprehenderit ipsam? Numquam, sed.
-                  </Desc>
+                  <Desc>{item.content}</Desc>
 
                   <ButtonCont>
-                    <StyledLink to={`/product?search=${item.title}`}>
+                    <StyledLink to={`/product?search=${item.destinationPage}`}>
                       <ButtonCustomOne>Explore</ButtonCustomOne>
                     </StyledLink>
                     <StyledLink to="sellersaccount">

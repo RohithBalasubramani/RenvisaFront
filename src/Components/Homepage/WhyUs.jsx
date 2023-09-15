@@ -19,6 +19,10 @@ const fadeIn = keyframes`
     opacity: 0;
     transform: translateY(10px);
   }
+  50% {
+    opacity: 0;
+    /* transform: translateY(10px); */
+  }
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -153,7 +157,9 @@ const CardCont = styled.div`
     flex: 3;
     color: #4f4f4f;
     animation-delay: 0.5s;
-    animation: ${fadeIn} 1s ease-in-out forwards; /* Apply the animation */
+    animation: ${fadeIn} 0.6s ease-in-out forwards;
+
+    /* Apply the animation */
   }
 
   &:hover ${Card} {
@@ -192,10 +198,8 @@ const WhyUs = () => {
             <CardTit>Easy Replacement</CardTit>
           </Card>
           <CardInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            soluta iusto autem impedit mollitia quasi, sunt dolorem fuga laborum
-            nostrum, accusamus incidunt odio ea architecto ullam unde illo
-            exercitationem suscipit?
+            Hassle-free product replacements for your convenience. Shop
+            worry-free with our easy replacement policy.
           </CardInfo>
         </CardCont>
 
@@ -204,13 +208,11 @@ const WhyUs = () => {
             <SVGSize>
               <ShippingIcon />
             </SVGSize>
-            <CardTit>Shipping</CardTit>
+            <CardTit>Nationwide Delivery</CardTit>
           </Card>
           <CardInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            soluta iusto autem impedit mollitia quasi, sunt dolorem fuga laborum
-            nostrum, accusamus incidunt odio ea architecto ullam unde illo
-            exercitationem suscipit?
+            Get your orders delivered nationwide, right to your business
+            doorstep. Enjoy the convenience of nationwide delivery services.
           </CardInfo>
         </CardCont>
 
@@ -225,10 +227,8 @@ const WhyUs = () => {
             </CardTit>
           </Card>
           <CardInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            soluta iusto autem impedit mollitia quasi, sunt dolorem fuga laborum
-            nostrum, accusamus incidunt odio ea architecto ullam unde illo
-            exercitationem suscipit?
+            Elevating your shopping experience with exceptional customer care
+            support. Our dedicated team is here to assist you when in need.{" "}
           </CardInfo>
         </CardCont>
 
@@ -243,10 +243,8 @@ const WhyUs = () => {
             </CardTit>
           </Card>
           <CardInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            soluta iusto autem impedit mollitia quasi, sunt dolorem fuga laborum
-            nostrum, accusamus incidunt odio ea architecto ullam unde illo
-            exercitationem suscipit?
+            We're committed to providing top-quality certified industrial
+            products. Trust in the best when you shop with us.
           </CardInfo>
         </CardCont>
       </CardCon>

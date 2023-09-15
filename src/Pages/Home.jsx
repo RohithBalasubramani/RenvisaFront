@@ -6,7 +6,13 @@ import WhyUs from "../Components/Homepage/WhyUs";
 import styled from "styled-components";
 import Slider from "../Components/Homepage/Slider/Slider";
 import Header from "../Components/Header/Header";
-import { Products5, sliderItems } from "../data";
+import {
+  Products5,
+  sliderItems,
+  sliderItemsA,
+  sliderItemsB,
+  sliderItemsTwo,
+} from "../data";
 import ScrollButton from "../Components/Homepage/ScrollButton";
 import SliderBack from "../Assets/Slider/Slider.png";
 import SellerTwo from "../Components/Homepage/Solu/SellerComp2";
@@ -156,7 +162,7 @@ const Home = () => {
       </HeadCon>
 
       <Slide>
-        <Slider Items={sliderItems} />
+        <Slider Items={sliderItemsTwo} />
         <ScrollButton />
       </Slide>
 
@@ -188,14 +194,14 @@ const Home = () => {
           </div>
         </FilterBoxBrand>
 
-        <Solu Items={sliderItems} />
+        <Solu Items={sliderItemsA} />
 
         <WhyUs />
 
         <HeadTwo>Why Customers Love Renvisa </HeadTwo>
         <Review />
 
-        <SellerTwo Items={sliderItems} />
+        <SellerTwo Items={sliderItemsB} />
         {/* <HalfWidthCarousel items={sliderItems} /> */}
       </Container>
     </>

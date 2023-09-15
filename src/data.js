@@ -1,3 +1,14 @@
+import FactoryWorkShop from "./Assets/Slider/factory workshop.jpg";
+import SolarFarm from "./Assets/Slider/solar farm.jpg";
+import Technician from "./Assets/Slider/solar technician 1.jpeg";
+
+import HealthSafety from "./Assets/Slider/HealthSafety.jpg";
+import SolarPanel from "./Assets/Slider/SolarPanels.jpg";
+import FactoryWork from "./Assets/Slider/FactoryWork.jpg";
+
+import Indus from "./Assets/Slider/Industry.jpg";
+import Lugs from "./Assets/Slider/Lugs.jpg";
+//
 import im1 from "./Assets/Slider/factory workshop.jpg";
 import im2 from "./Assets/Slider/solar farm.jpg";
 import im3 from "./Assets/Slider/solar technician 1.jpeg";
@@ -23,7 +34,7 @@ import pd4 from "./Assets/Prod4/ArmouredCable.png";
 import pd5 from "./Assets/Prod4/CableTies.png";
 
 import Of1 from "./Assets/Review/TS1.png";
-import Of2 from "./Assets/Review/TS2.png";
+import Of2 from "./Assets/Review/Vikram_Solar_logo.svg.png";
 import Of3 from "./Assets/Review/TS3.png";
 
 import Us1 from "./Assets/Review/user1.jpg";
@@ -44,6 +55,75 @@ import pMounta4 from "./Assets/AssetsAlt/PMountA3.jpg";
 
 import SlBg from "./Assets/Slider/SliBg1.jpg";
 import { green } from "@mui/material/colors";
+
+export const sliderItemsTwo = [
+  {
+    title: "Explore Renvisa",
+    content:
+      "Discover an extensive catalog of top-quality industrial solutions. From Solar to Renewable Energy, Construction to Electrical, Renvisa is your go-to B2B marketplace for premium industrial products. Simplify your procurement experience with us today.",
+    destinationPage: "",
+  },
+  {
+    title: "Solar Solutions",
+    content:
+      "Elevate your solar projects with top-quality solar panels and more. Explore our cutting-edge solar products for sustainable and efficient energy solutions.",
+    destinationPage: "Solar",
+  },
+  {
+    title: "Renewable Energy",
+    content:
+      "Discover a wide range of renewable energy solutions. Explore clamp meters, combiner boxes, aluminum lugs, and more. Dive into sustainability with our comprehensive renewable energy product line today!",
+    destinationPage: "Renewable",
+  },
+];
+
+export const sliderItemsA = [
+  {
+    title: "Connectors and Accessories",
+    content:
+      "Explore our comprehensive range of Connectors and Accessories, carefully curated to simplify your industrial processes. From high-quality connectors for reliable linkages to essential accessories for efficient operations, we offer top-notch solutions at unbeatable prices. Trust Renvisa for your B2B procurement needs.",
+    destinationPage: "Connectors and Accessories",
+    backgroundImage: SolarFarm,
+  },
+  {
+    title: "Lugs and Glands",
+    content:
+      "Discover our extensive range of Lugs and Glands, essential components for secure electrical connections. From durable lugs for conductivity to reliable glands for cable protection, we offer top-notch solutions to enhance your industrial operations. Explore unbeatable deals on our B2B ecommerce platform today.",
+    destinationPage: "Lugs and Glands",
+    backgroundImage: Lugs,
+  },
+  {
+    title: "Health and Safety",
+    content:
+      "Discover our extensive selection of Occupational Health and Safety products, designed to protect your workforce and workplace. With Renvisa Tech, safety is non-negotiable. Explore our range and secure your business today.",
+    destinationPage: "Occupational Health and Safety Category Page",
+    backgroundImage: HealthSafety,
+  },
+];
+
+export const sliderItemsB = [
+  {
+    title: "Electrical Solutions",
+    content:
+      "Discover our comprehensive range of electrical products tailored to meet the unique demands of the Electrical sector. From cables to connectors, we've got you covered. Elevate your electrical projects with Renvisa. Explore now.",
+    destinationPage: "Electrical Sector Page",
+    backgroundImage: SolarPanel,
+  },
+  {
+    title: "Construction Products",
+    content:
+      "Renvisa is your go-to source for top-quality construction products. From structural materials to safety gear, we've got you covered. Build with confidence using our trusted construction solutions. Explore our extensive range today.",
+    destinationPage: "Construction Sector",
+    backgroundImage: Indus,
+  },
+  {
+    title: "Industrial Products",
+    content:
+      "Renvisa empowers your industrial operations with a wide range of high-quality products. From machinery to safety equipment, find everything you need to enhance productivity and safety. Elevate your industry with Renvisa. Explore now!",
+    destinationPage: "Industrial Sector Products Page",
+    backgroundImage: FactoryWork,
+  },
+];
 
 export const sliderItems = [
   {
@@ -75,24 +155,21 @@ export const ReviewData = [
     imgOf: Of1,
     imgUser: Us1,
     name: "Jessica Parker",
-    desc: "GET FLAT 30% OFF.",
-    bg: "f5fafd",
+    desc: "Sourcing industrial products from Renvisa for a while now, and their Connectors and Accessories collection is top-notch. Their quality and pricing are unbeatable.",
   },
   {
     id: 2,
     imgOf: Of2,
     imgUser: Us2,
     name: "Rahul Jain",
-    desc: "GET FLAT 30% OFF.",
-    bg: "f5fafd",
+    desc: "Workplace safety seriously, and Renvisa's Occupational Health and Safety products have been a game-changer for us. Their range of safety gear is comprehensive.",
   },
   {
     id: 3,
     imgOf: Of3,
     imgUser: Us3,
     name: "Naomi Jain",
-    desc: "GET FLAT 30% OFF.",
-    bg: "f5fafd",
+    desc: "When it comes to Lugs and Glands, Renvisa has been our trusted partner. Their products are reliable and durable. Plus, their customer service is exceptional.",
   },
 ];
 

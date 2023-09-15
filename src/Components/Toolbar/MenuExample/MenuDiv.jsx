@@ -79,7 +79,7 @@ function MenuDiv({ colo, arccol }) {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   if (error) {

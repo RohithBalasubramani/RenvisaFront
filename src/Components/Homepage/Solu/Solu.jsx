@@ -13,7 +13,7 @@ const Container = styled.div`
   overflow-y: hidden;
 
   background: rgba(76, 175, 80, 0);
-  font-family: "Poppins";
+  font-family: "Lexend";
   font-style: normal;
   font-weight: 700;
   color: #ffffff;
@@ -70,7 +70,7 @@ const SlideContBox = styled.div`
   gap: 4vh;
   padding-top: 15%;
   padding-bottom: 15%;
-  padding-left: 10%;
+  padding-left: 5%;
   padding-right: 11%;
 `;
 
@@ -173,7 +173,7 @@ const Solu = ({ Items, interval = 5000 }) => {
         <WrapperA slideIndex={slideIndex}>
           {Items.map((item) => (
             <Slide key={item.id}>
-              <Image src={item.img} />
+              <Image src={item.backgroundImage} />
             </Slide>
           ))}
         </WrapperA>
@@ -183,15 +183,7 @@ const Solu = ({ Items, interval = 5000 }) => {
             <SlideB key={item.id}>
               <SlideContBox>
                 <BoldSecondWord sentence={item.title} />
-                <ContBoxCont>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  at augue lacinia urna porta tempor eu vitae risus. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit. Aenean ac diam
-                  sit amet purus tincidunt vehicula id tempor lorem. Praesent
-                  ipsum tellus, congue a libero ut, congue dictum lorem. In
-                  lacus metus, tempor at imperdiet at, consectetur sit amet
-                  ligula.
-                </ContBoxCont>
+                <ContBoxCont>{item.content}</ContBoxCont>
                 <StyledLink to={`/product?search=${item.title}`}>
                   <Button>View More</Button>
                 </StyledLink>

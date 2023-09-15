@@ -6,6 +6,7 @@ import { ChevronRight } from "@mui/icons-material";
 import { Products4 } from "../data";
 import ProductCard from "../Components/Homepage/ProductCard/ProductCard";
 import ProdCardTwo from "../Components/Homepage/ProductCard/ProdCardTwo";
+import StyledLink from "../Components/StyLink";
 
 const Container = styled.div`
   background: #f9f9f9;
@@ -49,16 +50,20 @@ const HeadSpan = styled.div`
 const SimilarProdDiv = styled.div`
   width: 95%;
   margin-left: 2vw;
-  margin-bottom: 5vh;
+
   margin-top: 10vh;
 `;
 
 const ProdWrapper = styled.div`
   display: flex;
-  gap: 3vh;
+  gap: 2vh;
   margin-top: 2vh;
-
+  padding-bottom: 5vh;
   margin-right: auto;
+`;
+
+const Flex = styled.div`
+  display: flex;
 `;
 
 const Cart = ({ data }) => {
@@ -74,9 +79,13 @@ const Cart = ({ data }) => {
 
         <SimilarProdDiv>
           <Head>
-            Similar Products{" "}
+            Recommended Products{" "}
             <HeadSpan>
-              <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
+              <StyledLink to={`/product?search=`}>
+                <Flex>
+                  <div>See more</div> <ChevronRight sx={{ marginTop: "5px" }} />
+                </Flex>
+              </StyledLink>
             </HeadSpan>
           </Head>
 

@@ -165,7 +165,7 @@ const SellerTwo = ({ Items, interval = 5000 }) => {
         <WrapperA slideIndex={slideIndex}>
           {Items.map((item) => (
             <Slide key={item.id}>
-              <Image src={item.img} />
+              <Image src={item.backgroundImage} />
             </Slide>
           ))}
         </WrapperA>
@@ -175,15 +175,7 @@ const SellerTwo = ({ Items, interval = 5000 }) => {
             <SlideB key={item.id}>
               <SlideContBox>
                 <BoldSecondWord sentence={item.title} />
-                <ContBoxCont>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  at augue lacinia urna porta tempor eu vitae risus. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit. Aenean ac diam
-                  sit amet purus tincidunt vehicula id tempor lorem. Praesent
-                  ipsum tellus, congue a libero ut, congue dictum lorem. In
-                  lacus metus, tempor at imperdiet at, consectetur sit amet
-                  ligula.
-                </ContBoxCont>
+                <ContBoxCont>{item.content}</ContBoxCont>
                 <Button>TRY NOW</Button>
               </SlideContBox>
             </SlideB>
