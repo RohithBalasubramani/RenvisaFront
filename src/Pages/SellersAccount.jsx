@@ -22,7 +22,7 @@ import {
 import React from "react";
 import styled from "styled-components";
 import CustomizedAccordions from "../Components/Bulkquery/Accordion";
-import Sellers from "../Components/SellersAccount/Sellers";
+import Sellers from "../Components/SellersAccount/SellerTwo";
 import SliderBack from "../Assets/Sellers/SellersBack.jpg";
 import Logo from "../Components/Header/Logo";
 import LogoWhite from "../Components/Header/LogoWhite";
@@ -65,6 +65,7 @@ const TitSpan = styled.div`
   letter-spacing: 0.7px;
   width: 80%;
   margin-top: 2vh;
+  margin-left: 8vh;
 `;
 
 const TitAccent = styled.div`
@@ -163,12 +164,14 @@ const SellersAccount = () => {
         <Title>
           <TitFlex>
             <LogoWhite />
-            <div>Join Renvisa as a Seller</div>
+            <div>Are you a seller? Join Renvisa Tech today!</div>
           </TitFlex>
           <TitSpan>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at
-            augue lacinia urna porta tempor eu vitae risus. Lorem ipsum dolor
-            sit amet, consectetur
+            Now you can easily elevate your business with Renvisa's online B2B
+            Industrial Marketplace. Gain access to a vast network of potential
+            buyers, increase your visibility, and boost your sales. Our platform
+            is designed to connect you with the right customers for your
+            products.
           </TitSpan>
         </Title>
 

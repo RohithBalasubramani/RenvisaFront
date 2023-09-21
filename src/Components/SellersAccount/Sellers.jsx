@@ -143,6 +143,23 @@ const Sellers = () => {
   const [error, setError] = useState(null);
   const [personName, setPersonName] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    companyName: "",
+    sellerType: "",
+    gstNumber: "",
+    brand: [],
+  });
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -159,15 +176,52 @@ const Sellers = () => {
     fetchData();
   }, []);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleChangeBrand = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
+  const handleBrandChange = (e) => {
+    const { options } = e.target;
+    const selectedBrands = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedBrands.push(options[i].value);
+      }
+    }
+    setFormData({
+      ...formData,
+      brand: selectedBrands,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://renvisa.org/api/seller/register/",
+        formData
+      );
+      setSnackbarMessage(
+        "Registration successful. Check your email for verification."
+      );
+      setOpenSuccessSnackbar(true);
+    } catch (error) {
+      setSnackbarMessage("Error: Registration failed. Please try again.");
+      setOpenErrorSnackbar(true);
+    }
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSuccessSnackbar(false);
+    setOpenErrorSnackbar(false);
   };
 
   const handleClick = () => {
@@ -190,6 +244,29 @@ const Sellers = () => {
     return <p>Error: {error.message}</p>;
   }
 
+  // const handleClickPost = async () => {
+  //   try {
+  //     const formData = {
+  //       firstName: firstName, // Use your state variable for first name
+  //       lastName: lastName, // Use your state variable for last name
+  //       companyName: companyName, // Use your state variable for company name
+  //       sellerType: age, // Use the selected seller type
+  //       email: email, // Use your state variable for email
+  //       // gstNumber: gstNumber, // Use your state variable for GST number
+  //       mobileNumber: mobileNumber, // Use your state variable for mobile number
+  //       brand: personName, // Use the selected brands
+  //       password: password, // Use your state variable for password
+  //     };
+
+  //     // Make an Axios POST request with the form data
+  //     await axios.post("https://renvisa.org/seller-registration", formData);
+
+  //     setOpen(true); // Display the success Snackbar
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+
   if (data) {
     const uniqueBrands = [...new Set(data.map((item) => item.brand))];
     return (
@@ -199,109 +276,138 @@ const Sellers = () => {
             <Storefront sx={{ width: "4.5vh", height: "4.5vh" }} />
             <div>Seller Registration</div>
           </Title>
-          <PassCont>
-            <p>Please Enter Your Full Name</p>
-          </PassCont>
-          <div>
+          <form onSubmit={handleSubmit}>
+            <PassCont>
+              <p>Please Enter Your Full Name</p>
+            </PassCont>
+            <div>
+              <CustomTextFeild
+                placeholder="Enter First Name"
+                sx={{ width: "60%" }}
+                value={formData.firstName}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+              />
+              <CustomTextFeild
+                placeholder="Enter Last Name"
+                sx={{ width: "38%", marginLeft: "2%" }}
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <PassCont>
+              <p>Company Name</p>
+            </PassCont>
             <CustomTextFeild
-              placeholder="Enter First Name"
-              sx={{ width: "60%" }}
+              placeholder="Please enter the company name here"
+              value={formData.companyName}
+              onChange={handleChange}
+              fullWidth
             />
-            <CustomTextFeild
-              placeholder="Enter Last Name"
-              sx={{ width: "38%", marginLeft: "2%" }}
-            />
-          </div>
-          <PassCont>
-            <p>Company Name</p>
-          </PassCont>
-          <CustomTextFeild
-            placeholder="Please enter the company name here"
-            fullWidth
-          />
-          <PassCont>
-            <p>Seller Type</p>
-          </PassCont>
-          <Select
-            value={age}
-            onChange={handleChange}
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-            fullWidth
-          >
-            <MenuItem
-              value=""
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "5px",
-
-                "		.MuiSelect-nativeInput": {
-                  color: "rgba(31, 31, 31, 0.51)",
-                  fontStyle: "italic",
-                  fontWeight: "500",
-                  fonrSize: "10px",
-                },
-              }}
+            <PassCont>
+              <p>Seller Type</p>
+            </PassCont>
+            <Select
+              value={formData.sellerType}
+              onChange={handleChange}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+              fullWidth
             >
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Distributors</MenuItem>
-            <MenuItem value={20}>Sellers</MenuItem>
-            <MenuItem value={30}>Dealers</MenuItem>
-            <MenuItem value={40}>Manufactures</MenuItem>
-          </Select>
-          <PassCont>
-            <p>Email</p>
-          </PassCont>
-          <CustomTextFeild placeholder="Enter your Email ID" fullWidth />
+              <MenuItem
+                value=""
+                sx={{
+                  backgroundColor: "white",
+                  borderRadius: "5px",
 
-          <PassCont>
-            <p>GST Number</p>
-          </PassCont>
-          <CustomTextFeild
-            placeholder="Please Enter Your GST Number"
-            fullWidth
-          />
-
-          <PassCont>
-            <p>Mobile Number</p>
-          </PassCont>
-          <CustomTextFeild placeholder="Enter your Mobile Number" fullWidth />
-          <PassCont>
-            <p>Brand</p>
-          </PassCont>
-          <Select
-            sx={{ backgroundColor: "white", borderRadius: "5px" }}
-            multiple
-            displayEmpty
-            value={personName}
-            onChange={handleChangeBrand}
-            input={<OutlinedInput />}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return <em>Choose Brand</em>;
-              }
-              return selected.join(", ");
-            }}
-            MenuProps={MenuProps}
-            inputProps={{ "aria-label": "Without label" }}
-            fullWidth
-          >
-            {uniqueBrands.map((name) => (
-              <MenuItem key={name} value={name}>
-                <Checkbox checked={personName.indexOf(name) > -1} />
-                <ListItemText primary={name} />
+                  "		.MuiSelect-nativeInput": {
+                    color: "rgba(31, 31, 31, 0.51)",
+                    fontStyle: "italic",
+                    fontWeight: "500",
+                    fonrSize: "10px",
+                  },
+                }}
+              >
+                <em>None</em>
               </MenuItem>
-            ))}
-          </Select>
-          <Butt onClick={handleClick}>Submit</Butt>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              sx={{ width: "100%" }}
+              <MenuItem value={10}>Distributors</MenuItem>
+              <MenuItem value={20}>Sellers</MenuItem>
+              <MenuItem value={30}>Dealers</MenuItem>
+              <MenuItem value={40}>Manufactures</MenuItem>
+            </Select>
+            <PassCont>
+              <p>Email</p>
+            </PassCont>
+            <CustomTextFeild
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your Email ID"
+              fullWidth
+            />
+
+            <PassCont>
+              <p>GST Number</p>
+            </PassCont>
+            <CustomTextFeild
+              placeholder="Please Enter Your GST Number"
+              value={formData.gstNumber}
+              onChange={handleChange}
+              fullWidth
+            />
+
+            <PassCont>
+              <p>Mobile Number</p>
+            </PassCont>
+            <CustomTextFeild placeholder="Enter your Mobile Number" fullWidth />
+            <PassCont>
+              <p>Brand</p>
+            </PassCont>
+            <Select
+              sx={{ backgroundColor: "white", borderRadius: "5px" }}
+              multiple
+              displayEmpty
+              value={formData.brand}
+              onChange={handleBrandChange}
+              input={<OutlinedInput />}
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <em>Choose Brand</em>;
+                }
+                return selected.join(", ");
+              }}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+              fullWidth
             >
-              Sent Request
+              {uniqueBrands.map((name) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={personName.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </form>
+          <Butt type="submit">Submit</Butt>
+
+          <Snackbar
+            open={openSuccessSnackbar}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+          >
+            <Alert onClose={handleSnackbarClose} severity="success">
+              {snackbarMessage}
+            </Alert>
+          </Snackbar>
+
+          {/* Error Snackbar */}
+          <Snackbar
+            open={openErrorSnackbar}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+          >
+            <Alert onClose={handleSnackbarClose} severity="error">
+              {snackbarMessage}
             </Alert>
           </Snackbar>
         </Disp>

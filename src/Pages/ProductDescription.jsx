@@ -21,6 +21,7 @@ import SimilarProd from "../Components/PDP/SimilarProd";
 import axios from "axios";
 import { useEffect } from "react";
 import { Alert, Snackbar } from "@mui/material";
+import BulkComp from "../Components/PDP/BulkComp";
 
 const ContainerWhole = styled.div`
   width: 100%;
@@ -454,11 +455,12 @@ const TDtwo = styled.td`
   color: #4f4f4f;
 `;
 
-const QuantBox = styled.div`
+const QuantBox = styled.input`
   background: white;
   border-radius: 3px;
   border: 1px solid #4f4f4f;
-  width: 25px;
+  min-width: 25px;
+  max-width: 34px;
   text-align: center;
 `;
 
@@ -668,7 +670,11 @@ const ProductDescription = ({ products }) => {
               <CartlineQuant>
                 Quantity
                 <Remove onClick={() => rmv(product)} />{" "}
-                <QuantBox>{quantity}</QuantBox>{" "}
+                <QuantBox
+                  value={quantity}
+                  name="quantity"
+                  onChange={(e) => setQuantity(e.target.value)}
+                ></QuantBox>{" "}
                 <Add onClick={() => add(product)} />
               </CartlineQuant>
 
@@ -686,7 +692,7 @@ const ProductDescription = ({ products }) => {
 
         <Wrapper>
           <BulkContainer>
-            <BulkImg src={product.image}></BulkImg>
+            {/* <BulkImg src={product.image}></BulkImg>
             <BulkLineOne>
               Looking to purchase in <b>Bulk?</b>
               <BulkSecondLine>
@@ -695,7 +701,8 @@ const ProductDescription = ({ products }) => {
             </BulkLineOne>
             <BulkButton onClick={handleQuotationRequest}>
               Submit Request
-            </BulkButton>
+            </BulkButton> */}
+            <BulkComp product={product} />
           </BulkContainer>
 
           <SectionTwo>

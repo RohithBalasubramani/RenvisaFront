@@ -184,7 +184,7 @@ const Solu = ({ Items, interval = 5000 }) => {
               <SlideContBox>
                 <BoldSecondWord sentence={item.title} />
                 <ContBoxCont>{item.content}</ContBoxCont>
-                <StyledLink to={`/product?search=${item.title}`}>
+                <StyledLink to={`/product?search=${item.destinationPage}`}>
                   <Button>View More</Button>
                 </StyledLink>
               </SlideContBox>

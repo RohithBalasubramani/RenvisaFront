@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import BoldSecondWord from "./BoldSecond";
+import StyledLink from "../../StyLink";
 
 const Container = styled.div`
   width: 100%;
@@ -176,7 +177,9 @@ const SellerTwo = ({ Items, interval = 5000 }) => {
               <SlideContBox>
                 <BoldSecondWord sentence={item.title} />
                 <ContBoxCont>{item.content}</ContBoxCont>
-                <Button>TRY NOW</Button>
+                <StyledLink to={`/product?search=${item.destinationPage}`}>
+                  <Button>View More</Button>
+                </StyledLink>
               </SlideContBox>
             </SlideB>
           ))}
