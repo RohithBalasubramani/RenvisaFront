@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RenvisaFront/static/css/main.87abafb0.css",
-    "main.js": "/RenvisaFront/static/js/main.36d08341.js",
+    "main.js": "/RenvisaFront/static/js/main.be8e830b.js",
     "static/js/787.c5429df2.chunk.js": "/RenvisaFront/static/js/787.c5429df2.chunk.js",
     "static/media/solar technician 1.jpeg": "/RenvisaFront/static/media/solar technician 1.03d66eea647e7dcac2e8.jpeg",
     "static/media/solar farm.jpg": "/RenvisaFront/static/media/solar farm.964a59348cb96beaca94.jpg",
@@ -88,11 +88,11 @@
     "static/media/BestSeller.svg": "/RenvisaFront/static/media/BestSeller.ce42bd21e5fd36b91110ea437c3625fa.svg",
     "static/media/DDArc.svg": "/RenvisaFront/static/media/DDArc.6d8c850a622f3e6c59f98b5ecc2f94d8.svg",
     "main.87abafb0.css.map": "/RenvisaFront/static/css/main.87abafb0.css.map",
-    "main.36d08341.js.map": "/RenvisaFront/static/js/main.36d08341.js.map",
+    "main.be8e830b.js.map": "/RenvisaFront/static/js/main.be8e830b.js.map",
     "787.c5429df2.chunk.js.map": "/RenvisaFront/static/js/787.c5429df2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.87abafb0.css",
-    "static/js/main.36d08341.js"
+    "static/js/main.be8e830b.js"
   ]
 }
