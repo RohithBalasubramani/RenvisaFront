@@ -232,7 +232,7 @@ const TermsOfService = () => {
                 <h2>6. Privacy Policy</h2>
                 <Paragraph>
                   Your use of the Website is also governed by our Privacy
-                  Policy, which can be found [link to Privacy Policy].
+                  Policy, which can be found here.
                 </Paragraph>
               </Section>
               <Section id="termination">

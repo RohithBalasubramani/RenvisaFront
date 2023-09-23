@@ -282,8 +282,7 @@ const PrivacyPolicy = () => {
                 <h2>11. Contact Us</h2>
                 <Paragraph>
                   If you have any questions, concerns, or requests regarding
-                  this Privacy Policy, please contact us at [Contact
-                  Information].
+                  this Privacy Policy, please contact us at +91 9762723690.
                 </Paragraph>
               </Section>
               <Section id="acknowledgment">

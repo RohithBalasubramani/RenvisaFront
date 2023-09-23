@@ -310,14 +310,14 @@ const Footer = () => {
         <Right>
           <Title>Contact</Title>
           <ContactItem>
-            <Room style={{ marginRight: "10px" }} /> RENVisa, Hyderabad,
+            <Room style={{ marginRight: "10px" }} /> Renvisa, Hyderabad,
             Telangana, 500060
           </ContactItem>
           <ContactItem>
-            <Phone style={{ marginRight: "10px" }} /> +91 9848XXXXXX
+            <Phone style={{ marginRight: "10px" }} /> +91 9762723690
           </ContactItem>
           <ContactItem>
-            <MailIcon style={{ marginRight: "10px" }} /> contact@rnsa.dev
+            <MailIcon style={{ marginRight: "10px" }} /> admin@renvisa.org
           </ContactItem>
           <br></br>
           <Title>Secure Payment Gateways</Title>

@@ -284,7 +284,7 @@ const Disclaimer = () => {
                 <h2>10. Contact Us</h2>
                 <Paragraph>
                   a. If you have questions or concerns regarding this
-                  disclaimer, please contact us at [Contact Information].
+                  disclaimer, please contact us at +91 9762723690.
                 </Paragraph>
               </Section>
               <Section id="acknowledgment">

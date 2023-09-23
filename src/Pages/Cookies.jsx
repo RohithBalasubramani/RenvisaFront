@@ -239,7 +239,7 @@ const CookiePolicy = () => {
                 <h2>7. Contact Us</h2>
                 <Paragraph>
                   If you have any questions or concerns about our Cookie Policy,
-                  please contact us at [Contact Information].
+                  please contact us at +91 9762723690.
                 </Paragraph>
               </Section>
               <Paragraph>
